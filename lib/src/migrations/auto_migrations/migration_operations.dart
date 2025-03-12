@@ -65,15 +65,20 @@ class MigrationOperations {
 
         oldColumns
             .where((oldColumn) => oldColumn == newColumn)
-            .forEach((oldColumn) {
-          newColumnsToCopy[newColumn] = oldColumn;
-        });
+            .forEach((oldColumn) => newColumnsToCopy[newColumn] = oldColumn);
       }
 
-      final newcolumnsToInsert =
-          newColumnsToCopy.keys.toList().map((e) => e.name).join(', ');
-      final oldColumnsToSelect =
-          newColumnsToCopy.values.toList().map((e) => e.name).join(', ');
+      final newcolumnsToInsert = newColumnsToCopy //
+          .keys
+          .toList()
+          .map((e) => e.name)
+          .join(', ');
+
+      final oldColumnsToSelect = newColumnsToCopy //
+          .values
+          .toList()
+          .map((e) => e.name)
+          .join(', ');
 
       sql.add('''
              INSERT INTO $tableName ($newcolumnsToInsert) 
@@ -107,8 +112,10 @@ class MigrationOperations {
   static Future<void> dropAllTables(SqliteDbConnection connection) async {
     final db = await connection.open();
     final tables = <String>[];
-    final result =
-        await db.rawQuery("SELECT * FROM sqlite_master WHERE type='table';");
+    final result = await db.rawQuery(
+      "SELECT * FROM sqlite_master WHERE type='table';",
+    );
+
     result.map((e) => e['name']).forEach((e) {
       if (e != 'android_metadata' && e != 'sqlite_sequence') {
         tables.add(e as String);
@@ -143,7 +150,11 @@ class MigrationOperations {
       if (column.hasForeignKey) {
         for (var fk in column.foreignKeys) {
           sql.add(
-            'ALTER TABLE $tableName ADD CONSTRAINT fk_${column.name}_${fk.referencedEntity} FOREIGN KEY (${column.name}) REFERENCES ${fk.referencedEntity}(${fk.referencedColumn}) ON DELETE ${fk.onDeleteAction.toText};',
+            '''ALTER TABLE $tableName 
+              ADD CONSTRAINT fk_${column.name}_${fk.referencedEntity} 
+              FOREIGN KEY (${column.name}) 
+              REFERENCES ${fk.referencedEntity}(${fk.referencedColumn})
+              ON DELETE ${fk.onDeleteAction.toText};''',
           );
         }
       }
@@ -196,7 +207,7 @@ class MigrationOperations {
   static bool canCopyColumnValues(
     DbEntityColumn oldColumn,
     DbEntityColumn newColumn, {
-    StringBuffer? reason, // Para registrar explicações sobre falhas
+    StringBuffer? reason,
   }) {
     //TODO: Ajustar o Metodo
     if (oldColumn.name != newColumn.name) {
@@ -229,7 +240,6 @@ class MigrationOperations {
       return true;
     }
 
-    // Mudanças complexas ou restritivas.
     reason?.write(
       "Column types are incompatible: '${oldColumn.type.toText}' to '${newColumn.type.toText}'.",
     );

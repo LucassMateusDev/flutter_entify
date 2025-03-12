@@ -1,10 +1,14 @@
+import 'package:meta/meta.dart';
+
 import '../connection/sqlite_adm_connection.dart';
 import '../connection/sqlite_connection_factory.dart';
+import '../exceptions/sqlite_data_mapper_exception.dart';
 import '../migrations/i_migration.dart';
 import '../migrations/sqlite_migration_factory.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
 
+@protected
 class DataBaseConfig {
   Database? _db;
   final String? name;
@@ -14,7 +18,7 @@ class DataBaseConfig {
 
   static DataBaseConfig get i {
     if (_instance == null) {
-      throw Exception(
+      throw SqliteDataMapperException(
           'DataBaseConfig não foi inicializado. Chame DataBaseConfig.initialize().');
     }
     return _instance!;

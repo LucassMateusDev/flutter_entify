@@ -1,5 +1,11 @@
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity_register.dart';
+import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
 
 abstract class DbEntityRegisterProvider {
-  List<DbEntityRegister> get entities;
+  List<DbEntity> get entities;
+
+  void registerEntities() {
+    for (final entity in entities) {
+      entity.register();
+    }
+  }
 }

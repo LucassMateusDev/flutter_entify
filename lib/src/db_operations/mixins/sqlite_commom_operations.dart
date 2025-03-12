@@ -4,6 +4,8 @@ import 'package:sqflite_entity_mapper_orm/src/db_operations/common_operations/se
 import 'package:sqflite_entity_mapper_orm/src/db_operations/common_operations/insert_operation.dart';
 import 'package:sqflite_entity_mapper_orm/src/db_operations/common_operations/update_operation.dart';
 
+import '../../exceptions/sqlite_data_mapper_exception.dart';
+
 mixin SqliteCommomOperations<T> {
   SqliteDbConnection get connection;
   DbEntity<T> get dbEntity;
@@ -24,7 +26,7 @@ mixin SqliteCommomOperations<T> {
   Future<int> insert(T entity) async {
     final id = await insertOperation(connection, dbEntity, entity);
 
-    if (id == 0) throw Exception('Erro ao inserir registro');
+    if (id == 0) throw SqliteDataMapperException('Erro ao inserir registro');
 
     return id;
   }

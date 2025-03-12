@@ -8,12 +8,19 @@ class QueryBuilder {
   final SqliteDbConnection connection;
 
   String _sqlStatement = '';
+  final List<dynamic> _parameters = [];
   bool _whereAdded = false;
   bool _blockStarted = false;
 
   String get sqlStatement => _sqlStatement;
+  List<dynamic> get parameters => _parameters;
 
-  void clearQuery() => _sqlStatement = '';
+  void clearQuery() {
+    _sqlStatement = '';
+    _parameters.clear();
+    _whereAdded = false;
+    _blockStarted = false;
+  }
 
   QueryBuilder select([List<String> columns = const []]) {
     _sqlStatement = 'SELECT ${columns.isEmpty ? 'x.*' : columns.join(', ')}';
@@ -21,70 +28,82 @@ class QueryBuilder {
   }
 
   QueryBuilder from(String tableName, [String alias = 'x']) {
-    _sqlStatement += ' FROM $tableName x';
+    _sqlStatement += ' FROM $tableName $alias';
     return this;
   }
 
-  QueryBuilder where(String condition) {
+  QueryBuilder where(String condition, [dynamic value]) {
     if (!_whereAdded) {
       _sqlStatement += ' WHERE $condition';
       _whereAdded = true;
     } else {
-      _sqlStatement += ' $condition';
+      _sqlStatement += ' AND $condition';
     }
+    if (value != null) _parameters.add(value);
     return this;
   }
 
-  QueryBuilder not([String condition = '']) {
+  QueryBuilder not([String condition = '', dynamic value]) {
     if (!_whereAdded) {
       _sqlStatement += ' WHERE NOT $condition';
       _whereAdded = true;
     } else {
       _sqlStatement += ' NOT $condition';
     }
+    if (value != null) _parameters.add(value);
     return this;
   }
 
   QueryBuilder equals(String column, dynamic value) {
-    return where('$column = $value');
+    return where('$column = ?', value);
   }
 
   QueryBuilder notEquals(String column, dynamic value) {
-    return where('$column <> $value');
+    return where('$column <> ?', value);
   }
 
   QueryBuilder inValues(String column, List<dynamic> values) {
-    final formattedValues = values.map((v) => v.toString()).join(', ');
-    return where('$column IN ($formattedValues)');
-  }
-
-  QueryBuilder greaterThan(String column, dynamic value) {
-    return where('$column > $value');
-  }
-
-  QueryBuilder greaterThanOrEquals(String column, dynamic value) {
-    return where('$column >= $value');
-  }
-
-  QueryBuilder lessThan(String column, dynamic value) {
-    return where('$column < $value');
-  }
-
-  QueryBuilder lessThanOrEquals(String column, dynamic value) {
-    return where('$column <= $value');
-  }
-
-  QueryBuilder between(String column, dynamic start, dynamic end) {
-    return where('$column BETWEEN $start AND $end');
-  }
-
-  QueryBuilder or([String condition = '']) {
-    _sqlStatement += ' OR $condition';
+    final placeholders = List.filled(values.length, '?').join(', ');
+    _sqlStatement += _whereAdded ? ' AND' : ' WHERE';
+    _sqlStatement += ' $column IN ($placeholders)';
+    _whereAdded = true;
+    _parameters.addAll(values);
     return this;
   }
 
-  QueryBuilder and([String condition = '']) {
+  QueryBuilder greaterThan(String column, dynamic value) {
+    return where('$column > ?', value);
+  }
+
+  QueryBuilder greaterThanOrEquals(String column, dynamic value) {
+    return where('$column >= ?', value);
+  }
+
+  QueryBuilder lessThan(String column, dynamic value) {
+    return where('$column < ?', value);
+  }
+
+  QueryBuilder lessThanOrEquals(String column, dynamic value) {
+    return where('$column <= ?', value);
+  }
+
+  QueryBuilder between(String column, dynamic start, dynamic end) {
+    _sqlStatement += _whereAdded ? ' AND' : ' WHERE';
+    _sqlStatement += ' $column BETWEEN ? AND ?';
+    _whereAdded = true;
+    _parameters.addAll([start, end]);
+    return this;
+  }
+
+  QueryBuilder or([String condition = '', dynamic value]) {
+    _sqlStatement += ' OR $condition';
+    if (value != null) _parameters.add(value);
+    return this;
+  }
+
+  QueryBuilder and([String condition = '', dynamic value]) {
     _sqlStatement += ' AND $condition';
+    if (value != null) _parameters.add(value);
     return this;
   }
 
@@ -113,7 +132,8 @@ class QueryBuilder {
   }
 
   QueryBuilder limit(int count) {
-    _sqlStatement += ' LIMIT $count';
+    _sqlStatement += ' LIMIT ?';
+    _parameters.add(count);
     return this;
   }
 }

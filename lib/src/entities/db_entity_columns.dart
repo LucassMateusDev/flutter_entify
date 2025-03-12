@@ -13,19 +13,6 @@ enum ColumnType {
   const ColumnType(this.toText);
 }
 
-// class ForeignKey<T extends DbEntity, F extends DbEntity> {
-//   final String relatedEntity;
-//   final dynamic Function(F entity) relatedPrimaryKeyField;
-//   final dynamic Function(T entity) getForeignKeyValue;
-
-//   ForeignKey({
-//     required this.relatedEntity,
-//     required this.relatedPrimaryKeyField,
-//     required this.getForeignKeyValue,
-//   });
-
-// }
-
 class DbEntityColumn {
   final String name;
   final ColumnType type;

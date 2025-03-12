@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
 import 'package:sqflite_entity_mapper_orm/src/entities/db_entity_definition.dart';
 import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/metadata/migration_metadata.dart';
 import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/metadata/migration_metadata_table.dart';
 import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/migration_operations.dart';
 
+@experimental
 class MigrationManager {
   static Future<void> applyMigrations(
     SqliteDbConnection connection,
@@ -12,12 +13,6 @@ class MigrationManager {
   ) async {
     try {
       final db = await connection.open();
-      // await MigrationOperations.dropAllTables(connection);
-      // await MigrationOperations.clearMigrations(connection);
-      // return;
-      // await db.execute('DROP TABLE IF EXISTS ServicesCars;');
-      // await db.execute('DROP TABLE IF EXISTS Services;');
-      // return;
 
       await MigrationMetadataTable.createIfNotExists(connection);
 
@@ -33,7 +28,7 @@ class MigrationManager {
             entity.name,
             entity.columns,
           );
-          debugPrint(sql);
+          // debugPrint(sql);
           await db.execute(sql);
 
           await MigrationMetadataTable.insert(
@@ -48,7 +43,7 @@ class MigrationManager {
           );
 
           for (final sql in migrationSql) {
-            debugPrint(sql);
+            // debugPrint(sql);
             await db.execute(sql);
           }
           await MigrationMetadataTable.update(

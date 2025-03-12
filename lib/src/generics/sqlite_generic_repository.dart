@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../exceptions/sqlite_data_mapper_exception.dart';
 import '../set/db_set.dart';
 
 abstract class SqliteGenericRepository<T> {
@@ -19,7 +20,7 @@ abstract class SqliteGenericRepository<T> {
 
     final result = await dbSet.findFirstOrNull('id = ?', [id]);
 
-    if (result == null) throw Exception('Erro ao buscar registro salvo');
+    if (result == null) throw SqliteDataMapperException('Error saving entity');
 
     return result;
   }

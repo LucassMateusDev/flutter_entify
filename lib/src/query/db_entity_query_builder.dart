@@ -22,13 +22,13 @@ class DbEntityQueryBuilder<T> extends QueryBuilder
   String get tableName => dbEntity.name;
 
   @override
-  DbEntityQueryBuilder<T> where(String condition) {
+  DbEntityQueryBuilder<T> where(String condition, [dynamic value]) {
     super.where(condition);
     return this;
   }
 
   @override
-  DbEntityQueryBuilder<T> not([String condition = '']) {
+  DbEntityQueryBuilder<T> not([String condition = '', dynamic value]) {
     super.not(condition);
     return this;
   }
@@ -75,13 +75,13 @@ class DbEntityQueryBuilder<T> extends QueryBuilder
   }
 
   @override
-  DbEntityQueryBuilder<T> or([String condition = '']) {
+  DbEntityQueryBuilder<T> or([String condition = '', dynamic value]) {
     super.or(condition);
     return this;
   }
 
   @override
-  DbEntityQueryBuilder<T> and([String condition = '']) {
+  DbEntityQueryBuilder<T> and([String condition = '', dynamic value]) {
     super.and(condition);
     return this;
   }

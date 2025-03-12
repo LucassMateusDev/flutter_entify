@@ -1,5 +1,6 @@
 import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
 import 'package:sqflite_entity_mapper_orm/src/db_operations/interfaces/db_operation.dart';
+import 'package:sqflite_entity_mapper_orm/src/exceptions/sqlite_data_mapper_exception.dart';
 // ignore: depend_on_referenced_packages
 
 class SelectOperation<T> implements DbOperation<T, T> {
@@ -23,7 +24,9 @@ class SelectOperation<T> implements DbOperation<T, T> {
         whereArgs: args,
       );
 
-      if (response.isEmpty) throw Exception('Registro não encontrado');
+      if (response.isEmpty) {
+        throw SqliteDataMapperException('Register not found');
+      }
 
       result = dbEntity.mapToEntity(response.first);
 

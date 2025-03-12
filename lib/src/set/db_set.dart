@@ -15,11 +15,11 @@ import '../entities/db_entity.dart';
 class DbSet<T> with SqliteCommomOperations<T>, SqliteEntityOperations<T> {
   late final DbEntity<T> _dbEntity;
   late final SqliteDbConnection _connection;
+  // final DbEntity<T> _dbEntity = DbEntityService.i.get<T>();
+  // final SqliteDbConnection _connection = SqliteDbConnection.get();
 
   @override
-  DbEntity<T> get dbEntity {
-    return _dbEntity;
-  }
+  DbEntity<T> get dbEntity => _dbEntity;
 
   @override
   SqliteDbConnection get connection => _connection;
@@ -27,10 +27,12 @@ class DbSet<T> with SqliteCommomOperations<T>, SqliteEntityOperations<T> {
   DbQuery<T> get query => DbQuery<T>(dbEntity, connection);
 
   SqliteCommomTransactionOperations<T> transaction(
-      SqliteDbTransaction transaction) {
+    SqliteDbTransaction transaction,
+  ) {
     return SqliteCommomTransactionOperations<T>(transaction, dbEntity);
   }
 
+  @protected
   void initialize(DbEntityService service, SqliteDbConnection connection) {
     _dbEntity = service.get<T>();
     _connection = connection;

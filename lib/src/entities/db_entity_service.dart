@@ -1,3 +1,6 @@
+import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+
+import '../exceptions/sqlite_data_mapper_exception.dart';
 import 'db_entity.dart';
 
 class DbEntityService {
@@ -18,7 +21,7 @@ class DbEntityService {
     final key = getEntityKey<T>();
 
     if (_entityMap.containsKey(key)) {
-      throw Exception('Entity already registered for type $T');
+      throw SqliteDataMapperException('Entity already registered for type $T');
     }
 
     _entityMap[key] = entity;
@@ -41,3 +44,57 @@ class DbEntityService {
 
   String getEntityKey<T>() => T.toString();
 }
+
+// extension DbEntityServiceExtensions on DbEntityService {
+//   List<DbEntityAutoUpdate> getRelatedEntities<T>() {
+//     final dbEntity = get<T>();
+//     final key = getEntityKey<T>();
+//     final relatedEntities = <DbEntityAutoUpdate>[];
+
+//     final columnsWithFk = getAllColumnsWithFk();
+
+//     final relatedFks = getAllRelatedFks<T>();
+//     // debugPrint('columnsWithFk: $columnsWithFk');
+
+//     for (final fk in relatedFks) {
+//       final entity = _entityMap[fk.entityKey];
+//       final column = columnsWithFk.firstWhere(
+//         (c) => c.foreignKeys.contains(fk),
+//       );
+//       if (entity != null) {
+//         relatedEntities.add(DbEntityAutoUpdate(
+//           entity: entity,
+//           column: column,
+//           fk: fk,
+//         ));
+//       }
+//     }
+
+//     return relatedEntities;
+//   }
+
+//   List<DbEntityColumn> getAllColumnsWithFk() {
+//     List<DbEntityColumn> columnsWithFk = [];
+
+//     for (final entity in _entityMap.values) {
+//       columnsWithFk.addAll(
+//         entity.columns.where((c) => c.hasForeignKey).toList(),
+//       );
+//     }
+
+//     return columnsWithFk;
+//   }
+
+//   List<ForeignKey> getAllRelatedFks<T>() {
+//     final dbEntity = get<T>();
+//     final columnsWithFk = getAllColumnsWithFk();
+
+//     final relatedFks = columnsWithFk
+//         .map((e) => e.foreignKeys)
+//         .expand((e) => e)
+//         .where((e) => e.referencedEntity == dbEntity.name)
+//         .toList();
+
+//     return relatedFks;
+//   }
+// }

@@ -1,6 +1,8 @@
 import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
 import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/metadata/migration_metadata.dart';
 
+import '../../../exceptions/sqlite_data_mapper_exception.dart';
+
 class MigrationMetadataTable {
   static String get tableName => 'migration_metadata';
 
@@ -65,7 +67,7 @@ class MigrationMetadataTable {
     );
 
     if (id == 0) {
-      throw Exception('Failed to update metadata');
+      throw SqliteDataMapperException('Failed to update metadata');
     }
   }
 }

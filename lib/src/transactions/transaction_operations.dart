@@ -12,6 +12,5 @@ abstract interface class TransactionOperations {
     Map<String, Object?> values, {
     String? where,
     List<Object?>? whereArgs,
-    // ConflictAlgorithm? conflictAlgorithm,
   });
 }

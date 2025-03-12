@@ -74,11 +74,11 @@ mixin SqliteEntityOperations<T> {
       }
 
       if (dbEntity.hasUniqueKeys(entity)) {
-        exists = await _checkIfUniqueKeyExists(entity);
+        exists = await _checkIfRecordExistsByUniqueKey(entity);
         return exists;
       }
 
-      exists = await _checkIfPrimaryKeyExists(entity);
+      exists = await _checkIfRecordExistsByPrimaryKey(entity);
 
       return exists;
     } finally {
@@ -86,7 +86,7 @@ mixin SqliteEntityOperations<T> {
     }
   }
 
-  Future<bool> _checkIfUniqueKeyExists(T entity) async {
+  Future<bool> _checkIfRecordExistsByUniqueKey(T entity) async {
     final db = await connection.open();
     final uniqueKeys = dbEntity.uniqueKeys(entity);
 
@@ -105,7 +105,7 @@ mixin SqliteEntityOperations<T> {
     return false;
   }
 
-  Future<bool> _checkIfPrimaryKeyExists(T entity) async {
+  Future<bool> _checkIfRecordExistsByPrimaryKey(T entity) async {
     final db = await connection.open();
     final primaryKey = dbEntity
         .primaryKey(entity)
@@ -113,7 +113,9 @@ mixin SqliteEntityOperations<T> {
 
     if (primaryKey.isEmpty) return false;
     if (primaryKey.containsKey('id') &&
-        (primaryKey['id'] == null || primaryKey['id'] < 1)) return false;
+        (primaryKey['id'] == null || primaryKey['id'] < 1)) {
+      return false;
+    }
 
     final clause = primaryKey.keys.map((key) => '$key = ?').join(' AND ');
     final args = primaryKey.values.toList();

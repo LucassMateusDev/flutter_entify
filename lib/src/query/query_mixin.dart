@@ -2,7 +2,7 @@ import 'package:sqflite_entity_mapper_orm/src/connection/sqlite_db_connection.da
 import 'package:sqflite_entity_mapper_orm/src/query/query_builder.dart';
 
 mixin QueryMixin {
-  SqliteDbConnection get connection;
+  SqliteDbConnection get queryConnection;
 
-  QueryBuilder get query => QueryBuilder(connection);
+  QueryBuilder get query => QueryBuilder(queryConnection);
 }
