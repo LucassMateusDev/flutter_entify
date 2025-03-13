@@ -11,7 +11,7 @@ export 'src/context/db_context_options_builder.dart';
 
 // Entities
 export 'src/entities/db_entity.dart';
-export 'src/entities/mixins/db_auto_entity_register.dart';
+export 'src/context/mixins/db_auto_entity_register.dart';
 export 'src/entities/db_entity_register.dart';
 export 'src/entities/db_entity_columns.dart';
 export 'src/entities/db_entity_foreign_key.dart';
