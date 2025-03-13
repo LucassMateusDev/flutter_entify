@@ -1,9 +1,9 @@
 name: sqflite_entity_mapper_orm
-description: "A lightweight and efficient ORM for Flutter, built on Sqflite. Simplifies CRUD operations, entity mapping, and database transactions."
+description: "A lightweight and efficient ORM for Flutter, inspired by .NET's Entity Framework and built on Sqflite. Simplifies CRUD operations and query execution, entity mapping and database transactions."
 long_description: |
-  `sqflite_entity_mapper_orm` is an ORM for Flutter based on `sqflite`. 
+  `sqflite_entity_mapper_orm` is an ORM for Flutter based on `sqflite`, inspired by .NET's Entity Framework. 
   It provides an easy way to map entities, manage relationships, and simplify SQL queries. 
-  Supports transactions, foreign keys, and query chaining.
+  Supports transactions, foreign keys, migrations, and query chaining.
 
 repository: https://github.com/LucassMateus/sqflite_entity_mapper_orm
 
