@@ -24,10 +24,7 @@ abstract class DbContext {
   }
 
   List<DbSet> get dbSets;
-  @protected
-  List<DbEntity> dbEntities = [];
-  @protected
-  List<DbEntityMapper> dbMappings = [];
+  List<DbEntity> get dbEntities => dbEntityService.entities.values.toList();
 
   @mustCallSuper
   FutureOr<void> binds() async {}
@@ -57,13 +54,13 @@ abstract class DbContext {
     }
   }
 
-  void registerEntities() {
+  void registerEntities(List<DbEntity> dbEntities) {
     for (final entity in dbEntities) {
       entity.register();
     }
   }
 
-  void createMappings() {
+  void createMappings(List<DbEntityMapper> dbMappings) {
     for (final dbMapper in dbMappings) {
       dbMapper.create();
     }
@@ -79,13 +76,11 @@ abstract class DbContext {
   }
 
   void _setDbEntitiesFromOptions() {
-    dbEntities = options.entities;
-    registerEntities();
+    registerEntities(options.entities);
   }
 
   void _setDbMappingsFromOptions() {
-    dbMappings = options.mappings;
-    createMappings();
+    createMappings(options.mappings);
   }
 
   Future<void> _executeBindsIfNotExecutedBefore() async {
