@@ -10,11 +10,14 @@ import 'package:sqflite_entity_mapper_orm/src/entities/db_entity_service.dart';
 import 'package:sqflite_entity_mapper_orm/src/mappers/db_entity_mapper.dart';
 import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/migration_manager.dart';
 import 'package:sqflite_entity_mapper_orm/src/set/db_set.dart';
+import 'package:sqflite_entity_mapper_orm/src/transactions/sqlite_db_transaction.dart';
 
 abstract class DbContext {
+  late final DbContextOptions options;
   late final DbEntityService dbEntityService;
   late final SqliteDbConnection dbConnection;
-  late final DbContextOptions options;
+  @protected
+  final SqliteDbTransaction transaction = SqliteDbTransaction();
 
   DbContext() {
     onConfiguring(DbContextOptionsBuilder());

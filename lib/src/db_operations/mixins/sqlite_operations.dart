@@ -1,13 +1,13 @@
 import 'package:meta/meta.dart';
 import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/common_operations/delete_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/common_operations/select_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/common_operations/insert_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/common_operations/update_operation.dart';
+import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/delete_operation.dart';
+import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/select_operation.dart';
+import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/insert_operation.dart';
+import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/update_operation.dart';
 
 import '../../exceptions/sqlite_data_mapper_exception.dart';
 
-mixin SqliteCommomOperations<T> {
+mixin SqliteOperations<T> {
   SqliteDbConnection get connection;
   DbEntity<T> get dbEntity;
 
@@ -20,15 +20,15 @@ mixin SqliteCommomOperations<T> {
   @protected
   final updateOperation = UpdateOperation<T>();
 
-  Future<void> delete(T entity) async {
+  Future<void> deleteAsync(T entity) async {
     await deleteOperation(connection, dbEntity, entity);
   }
 
-  Future<T?> select(T entity) async {
+  Future<T?> selectAsync(T entity) async {
     return await selectOperation(connection, dbEntity, entity);
   }
 
-  Future<int> insert(T entity) async {
+  Future<int> insertAsync(T entity) async {
     final id = await insertOperation(connection, dbEntity, entity);
 
     if (id == 0) throw SqliteDataMapperException('Error on insert entity');
@@ -36,7 +36,7 @@ mixin SqliteCommomOperations<T> {
     return id;
   }
 
-  Future<void> update(T entity) async {
+  Future<void> updateAsync(T entity) async {
     await updateOperation(connection, dbEntity, entity);
   }
 }
