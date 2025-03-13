@@ -8,11 +8,19 @@ class DbQuery<T> {
 
   DbQuery(this.dbEntity, this.connection);
 
-  DbEntityQueryBuilder<T> select([List<String> columns = const []]) {
+  DbEntityQueryBuilder<T> select({required List<String> columns}) {
     return DbEntityQueryBuilder<T>(
       dbEntity,
       connection,
       columns,
+    );
+  }
+
+  DbEntityQueryBuilder<T> selectAll() {
+    return DbEntityQueryBuilder<T>(
+      dbEntity,
+      connection,
+      [],
     );
   }
 }
