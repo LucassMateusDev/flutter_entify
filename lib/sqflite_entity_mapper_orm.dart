@@ -1,8 +1,5 @@
 library sqflite_entity_mapper_orm;
 
-// Config
-export 'src/config/data_base_config.dart';
-
 // Connection
 export 'src/connection/sqlite_adm_connection.dart';
 export 'src/connection/sqlite_db_connection.dart';
@@ -14,13 +11,10 @@ export 'src/context/db_context_options_builder.dart';
 
 // Entities
 export 'src/entities/db_entity.dart';
-// export 'src/entities/mixins/db_auto_entity_register.dart';
-export 'src/entities/db_entity_service.dart';
+export 'src/entities/mixins/db_auto_entity_register.dart';
 export 'src/entities/db_entity_register.dart';
-export 'src/entities/db_entity_register_provider.dart';
 export 'src/entities/db_entity_columns.dart';
 export 'src/entities/db_entity_foreign_key.dart';
-export 'src/entities/db_entity_provider.dart';
 
 // Generics
 export 'src/generics/sqlite_generic_repository.dart';
@@ -29,7 +23,6 @@ export 'src/generics/sqlite_generic_repository.dart';
 export 'src/mappers/create_db_map.dart';
 export 'src/mappers/db_entity_mapper.dart';
 export 'src/mappers/mixins/db_auto_entity_mapper.dart';
-export 'src/mappers/db_entity_mapper_provider.dart';
 
 // Migrations
 export 'src/migrations/i_migration.dart';
