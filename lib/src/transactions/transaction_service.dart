@@ -2,13 +2,11 @@
 import 'package:sqflite_entity_mapper_orm/src/transactions/sqlite_db_transaction.dart';
 
 class TransactionService {
-  late final SqliteDbTransaction _dbTransaction;
+  final SqliteDbTransaction _dbTransaction = SqliteDbTransaction();
 
   static TransactionService? _instance;
 
-  TransactionService._() {
-    _dbTransaction = SqliteDbTransaction();
-  }
+  TransactionService._();
 
   static TransactionService get i {
     _instance ??= TransactionService._();
