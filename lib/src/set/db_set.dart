@@ -38,6 +38,7 @@ class DbSet<T> with SqliteCommomOperations<T>, SqliteEntityOperations<T> {
     _connection = connection;
   }
 
+  //TODO: REMOVER DA MAIN
   Future<void> merge(List<T> entities) async {
     final transaction = _connection.getTransaction;
 
@@ -69,6 +70,7 @@ class DbSet<T> with SqliteCommomOperations<T>, SqliteEntityOperations<T> {
     }
   }
 
+  //TODO: REMOVER DA MAIN
   Future<List<Object?>> mergeCustom(
     List<T> entities, {
     required Future<bool> Function(T entity) shouldUpdate,
@@ -158,6 +160,7 @@ class DbSet<T> with SqliteCommomOperations<T>, SqliteEntityOperations<T> {
     }
   }
 
+  //TODO: REMOVER DA MAIN
   Future<void> mergeInTransaction(
     List<T> entities, {
     required SqliteDbTransaction transaction,
