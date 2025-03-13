@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
 
 class DbContextOptionsBuilder {
@@ -33,6 +34,7 @@ class DbContextOptionsBuilder {
     return this;
   }
 
+  @experimental
   DbContextOptionsBuilder withAutoMigrations() {
     _options.withAutoMigrations = true;
     return this;

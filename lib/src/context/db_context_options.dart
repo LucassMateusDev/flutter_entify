@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
 
 import '../exceptions/sqlite_data_mapper_exception.dart';
@@ -11,6 +12,7 @@ class DbContextOptions {
   List<DbEntity> entities = [];
   List<DbEntityMapper> mappings = [];
 
+  @experimental
   set withAutoMigrations(bool value) {
     if (value && migrations.isNotEmpty) {
       throw SqliteDataMapperException(

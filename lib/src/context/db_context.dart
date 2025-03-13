@@ -1,7 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'package:sqflite_entity_mapper_orm/src/config/data_base_config.dart';
+import 'package:sqflite_entity_mapper_orm/src/connection/sqlite_db_connection.dart';
+import 'package:sqflite_entity_mapper_orm/src/context/db_context_options.dart';
+import 'package:sqflite_entity_mapper_orm/src/context/db_context_options_builder.dart';
+import 'package:sqflite_entity_mapper_orm/src/entities/db_entity.dart';
+import 'package:sqflite_entity_mapper_orm/src/entities/db_entity_service.dart';
+import 'package:sqflite_entity_mapper_orm/src/mappers/db_entity_mapper.dart';
+import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/migration_manager.dart';
+import 'package:sqflite_entity_mapper_orm/src/set/db_set.dart';
 
 abstract class DbContext {
   // final DbEntityService dbEntityService;
@@ -15,12 +23,12 @@ abstract class DbContext {
   }
 
   List<DbSet> get dbSets;
+  @protected
   List<DbEntity> dbEntities = [];
+  @protected
   List<DbEntityMapper> dbMappings = [];
 
-  // List<DbEntity> get entities => dbSets.map((e) => e.dbEntity).toList();
-  List<DbEntity> get entities => dbEntityService.entities.values.toList();
-
+  @mustCallSuper
   FutureOr<void> binds() async {}
 
   @mustCallSuper
@@ -63,10 +71,10 @@ abstract class DbContext {
   Future<void> _optionsHandler() async {
     if (options.hasEntities) _setDbEntitiesFromOptions();
     if (options.hasMappings) _setDbMappingsFromOptions();
-    if (options.withAutoMigrations) {
-      await MigrationManager.applyMigrations(dbConnection, entities);
-    }
     if (options.executeBindsBeforeInitialize) await binds();
+    if (options.withAutoMigrations) {
+      await MigrationManager.applyMigrations(dbConnection, dbEntities);
+    }
   }
 
   void _setDbEntitiesFromOptions() {
