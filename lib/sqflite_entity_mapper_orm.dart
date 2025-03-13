@@ -8,10 +8,12 @@ export 'src/connection/sqlite_db_connection.dart';
 export 'src/context/db_context.dart';
 export 'src/context/db_context_options.dart';
 export 'src/context/db_context_options_builder.dart';
+export 'src/context/mixins/db_auto_entity_register.dart';
+export 'src/context/mixins/db_auto_entity_mapper.dart';
+export 'src/context/mixins/db_transaction_operations.dart';
 
 // Entities
 export 'src/entities/db_entity.dart';
-export 'src/context/mixins/db_auto_entity_register.dart';
 export 'src/entities/db_entity_register.dart';
 export 'src/entities/db_entity_columns.dart';
 export 'src/entities/db_entity_foreign_key.dart';
@@ -22,7 +24,6 @@ export 'src/generics/sqlite_generic_repository.dart';
 // Mappers
 export 'src/mappers/create_db_map.dart';
 export 'src/mappers/db_entity_mapper.dart';
-export 'src/mappers/mixins/db_auto_entity_mapper.dart';
 
 // Migrations
 export 'src/migrations/i_migration.dart';
