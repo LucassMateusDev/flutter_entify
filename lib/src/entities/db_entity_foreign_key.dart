@@ -22,9 +22,6 @@ class ForeignKey<T, F> {
     this.onDeleteAction = OnDeleteAction.noAction,
   });
 
-  String getReferencesQuery() =>
-      'SELECT * FROM $referencedEntity WHERE $referencedColumn = ?';
-
   String get entityKey => T.toString();
   String get referencedEntityKey => F.toString();
 }
