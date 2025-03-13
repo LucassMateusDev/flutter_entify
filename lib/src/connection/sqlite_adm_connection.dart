@@ -9,8 +9,10 @@ class SqliteAdmConnection with WidgetsBindingObserver {
   static SqliteAdmConnection get i {
     if (_instance == null) {
       throw SqliteDataMapperException(
-          'SqliteAdmConnection não foi inicializado. Chame SqliteAdmConnection.initialize().');
+        'SqliteAdmConnection is not initialized.',
+      );
     }
+
     return _instance!;
   }
 
