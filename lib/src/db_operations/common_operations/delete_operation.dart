@@ -6,7 +6,6 @@ class DeleteOperation<T> implements DbOperation<T, void> {
   Future<void> call(
     SqliteDbConnection connection,
     DbEntity<T> dbEntity,
-    //TODO: Criar classe para o parametro e encapsular clause e args, podendo ser possivel Executar o merge tbm
     T entity,
   ) async {
     final db = await connection.open();

@@ -6,6 +6,7 @@ import 'package:sqflite_entity_mapper_orm/src/db_operations/transaction_operatio
 import 'package:sqflite_entity_mapper_orm/src/db_operations/transaction_operations/update_in_transaction_operation.dart';
 import 'package:sqflite_entity_mapper_orm/src/transactions/sqlite_db_transaction.dart';
 
+//TODO: Implements Unit of Work pattern
 class SqliteCommomTransactionOperations<T> with SqliteEntityOperations<T> {
   SqliteCommomTransactionOperations(
     this.transaction,
@@ -37,6 +38,7 @@ class SqliteCommomTransactionOperations<T> with SqliteEntityOperations<T> {
 
   void update(T entity) => updateOperation(transaction, dbEntity, entity);
 
+  //TODO: REMOVER DA MAIN
   Future<void> merge(List<T> entities) async {
     for (final entity in entities) {
       if (await exists(entity)) {

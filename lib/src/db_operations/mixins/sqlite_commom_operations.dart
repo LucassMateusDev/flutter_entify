@@ -31,7 +31,7 @@ mixin SqliteCommomOperations<T> {
   Future<int> insert(T entity) async {
     final id = await insertOperation(connection, dbEntity, entity);
 
-    if (id == 0) throw SqliteDataMapperException('Erro ao inserir registro');
+    if (id == 0) throw SqliteDataMapperException('Error on insert entity');
 
     return id;
   }
