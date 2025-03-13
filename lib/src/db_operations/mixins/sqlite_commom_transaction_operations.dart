@@ -37,15 +37,4 @@ class SqliteCommomTransactionOperations<T> with SqliteEntityOperations<T> {
   void insert(T entity) => insertOperation(transaction, dbEntity, entity);
 
   void update(T entity) => updateOperation(transaction, dbEntity, entity);
-
-  //TODO: REMOVER DA MAIN
-  Future<void> merge(List<T> entities) async {
-    for (final entity in entities) {
-      if (await exists(entity)) {
-        update(entity);
-      } else {
-        insert(entity);
-      }
-    }
-  }
 }
