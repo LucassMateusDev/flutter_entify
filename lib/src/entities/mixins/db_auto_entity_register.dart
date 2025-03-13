@@ -1,17 +1,14 @@
-// import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'dart:async';
 
-// mixin DbAutoEntityRegister on DbContext {
-//   List<DbEntityRegisterProvider> get dbEntitiesProvider;
+import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
 
-//   @override
-//   List<DbEntity> get dbEntities => dbEntitiesProvider
-//       .map((provider) => provider.entities)
-//       .expand((element) => element)
-//       .toList();
+mixin DbAutoEntityRegister on DbContext {
+  List<DbEntity> get entities;
 
-//   void registerAutoEntities() {
-//     for (final provider in dbEntitiesProvider) {
-//       provider.registerEntities();
-//     }
-//   }
-// }
+  @override
+  FutureOr<void> binds() {
+    dbEntities = entities;
+    registerEntities();
+    return super.binds();
+  }
+}
