@@ -5,8 +5,17 @@ long_description: |
   It provides an easy way to map entities, manage relationships, and simplify SQL queries. 
   Supports transactions, foreign keys, and query chaining.
 
+repository: https://github.com/LucassMateus/sqflite_entity_mapper_orm
+
+topics:
+  - orm
+  - sqflite
+  - sqlite
+  - entity-mapper
+
+homepage: https://github.com/LucassMateus/sqflite_entity_mapper_orm
+
 version: 0.0.1
-# homepage:
 
 environment:
   sdk: ^3.0.0
