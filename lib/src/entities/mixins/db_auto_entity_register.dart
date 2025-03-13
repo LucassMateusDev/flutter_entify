@@ -7,8 +7,7 @@ mixin DbAutoEntityRegister on DbContext {
 
   @override
   FutureOr<void> binds() {
-    dbEntities = entities;
-    registerEntities();
+    registerEntities(entities);
     return super.binds();
   }
 }

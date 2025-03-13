@@ -7,8 +7,7 @@ mixin DbAutoEntityMapper on DbContext {
 
   @override
   FutureOr<void> binds() {
-    dbMappings = mappings;
-    createMappings();
+    createMappings(mappings);
     return super.binds();
   }
 }
