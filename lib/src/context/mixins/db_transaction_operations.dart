@@ -1,10 +1,10 @@
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/transaction_operations/delete_in_transaction_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/transaction_operations/insert_in_transaction_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/transaction_operations/update_in_transaction_operation.dart';
+import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/src/db_operations/transaction_operations/delete_in_transaction_operation.dart';
+import 'package:entify/src/db_operations/transaction_operations/insert_in_transaction_operation.dart';
+import 'package:entify/src/db_operations/transaction_operations/update_in_transaction_operation.dart';
 
 mixin DbTransactionOperations on DbContext {
-  void openTransaction() => transaction.open();
+  Future<void> openTransaction() async => transaction.open();
 
   void delete<T>(T entity) {
     final dbEntity = dbEntityService.get<T>();

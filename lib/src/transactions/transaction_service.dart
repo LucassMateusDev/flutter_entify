@@ -1,5 +1,5 @@
 // ignore: depend_on_referenced_packages
-import 'package:sqflite_entity_mapper_orm/src/transactions/sqlite_db_transaction.dart';
+import 'package:entify/src/transactions/sqlite_db_transaction.dart';
 
 class TransactionService {
   final SqliteDbTransaction _dbTransaction = SqliteDbTransaction();

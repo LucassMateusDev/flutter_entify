@@ -8,12 +8,14 @@ import '../migrations/sqlite_migration_factory.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
 
+//TODO: Implements Completer to initialize the database
 @protected
 class DataBaseConfig {
   Database? _db;
   final String? name;
   final int version;
   final List<IMigration> migrations;
+  final bool withAutoMigrations;
   static DataBaseConfig? _instance;
 
   static DataBaseConfig get i {
@@ -29,12 +31,13 @@ class DataBaseConfig {
     this.name,
     required this.version,
     required this.migrations,
+    required this.withAutoMigrations,
   }) {
     _db = db;
-    _initialize();
+    _onConfiguring();
   }
 
-  void _initialize() {
+  void _onConfiguring() {
     SqliteMigrationFactory.initialize(migrations: migrations);
 
     (_db == null)
@@ -42,11 +45,14 @@ class DataBaseConfig {
             name: name!,
             version: version,
             migrationFactory: SqliteMigrationFactory.i,
+            withAutoMigrations: withAutoMigrations,
           )
         : SqliteConnectionFactory.initializeWithDatabase(
             dataBase: _db!,
             version: version,
-            migrationFactory: SqliteMigrationFactory.i);
+            migrationFactory: SqliteMigrationFactory.i,
+            withAutoMigrations: withAutoMigrations,
+          );
 
     SqliteAdmConnection.initialize(SqliteConnectionFactory.i);
   }
@@ -56,12 +62,14 @@ class DataBaseConfig {
     String? name,
     required int version,
     required List<IMigration> migrations,
+    bool withAutoMigrations = false,
   }) {
     _instance ??= DataBaseConfig._(
       db: dataBase,
       name: name,
       version: version,
       migrations: migrations,
+      withAutoMigrations: withAutoMigrations,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'package:entify/sqflite_entity_mapper_orm.dart';
 
 class QueryBuilder {
   QueryBuilder(this.connection);

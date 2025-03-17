@@ -1,16 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:sqflite_entity_mapper_orm/src/config/data_base_config.dart';
-import 'package:sqflite_entity_mapper_orm/src/connection/sqlite_db_connection.dart';
-import 'package:sqflite_entity_mapper_orm/src/context/db_context_options.dart';
-import 'package:sqflite_entity_mapper_orm/src/context/db_context_options_builder.dart';
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity.dart';
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity_service.dart';
-import 'package:sqflite_entity_mapper_orm/src/mappers/db_entity_mapper.dart';
-import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/migration_manager.dart';
-import 'package:sqflite_entity_mapper_orm/src/set/db_set.dart';
-import 'package:sqflite_entity_mapper_orm/src/transactions/sqlite_db_transaction.dart';
+import 'package:entify/src/config/data_base_config.dart';
+import 'package:entify/src/connection/sqlite_db_connection.dart';
+import 'package:entify/src/context/db_context_options.dart';
+import 'package:entify/src/context/db_context_options_builder.dart';
+import 'package:entify/src/entities/db_entity.dart';
+import 'package:entify/src/entities/db_entity_service.dart';
+import 'package:entify/src/mappers/db_entity_mapper.dart';
+import 'package:entify/src/set/db_set.dart';
+import 'package:entify/src/transactions/sqlite_db_transaction.dart';
 
 abstract class DbContext {
   late final DbContextOptions options;
@@ -39,6 +38,7 @@ abstract class DbContext {
       name: options.databaseName,
       version: options.version,
       migrations: options.migrations,
+      withAutoMigrations: options.withAutoMigrations,
     );
     dbEntityService = DbEntityService.i;
     dbConnection = SqliteDbConnection.get();
@@ -70,9 +70,6 @@ abstract class DbContext {
     if (options.hasEntities) _setDbEntitiesFromOptions();
     if (options.hasMappings) _setDbMappingsFromOptions();
     if (options.executeBindsBeforeInitialize) await binds();
-    if (options.withAutoMigrations) {
-      await MigrationManager.applyMigrations(dbConnection, dbEntities);
-    }
   }
 
   void _setDbEntitiesFromOptions() {

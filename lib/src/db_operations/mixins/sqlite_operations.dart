@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/delete_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/select_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/insert_operation.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/operations/update_operation.dart';
+import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/src/db_operations/operations/delete_operation.dart';
+import 'package:entify/src/db_operations/operations/select_operation.dart';
+import 'package:entify/src/db_operations/operations/insert_operation.dart';
+import 'package:entify/src/db_operations/operations/update_operation.dart';
 
 import '../../exceptions/sqlite_data_mapper_exception.dart';
 

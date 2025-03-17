@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity.dart';
-import 'package:sqflite_entity_mapper_orm/src/entities/mixins/db_entity_transformer.dart';
+import 'package:entify/src/entities/db_entity.dart';
+import 'package:entify/src/entities/mixins/db_entity_transformer.dart';
 
 class SqliteQueryResult<T> with DbEntityTransformer<T> {
   List<Map<String, Object?>> result;

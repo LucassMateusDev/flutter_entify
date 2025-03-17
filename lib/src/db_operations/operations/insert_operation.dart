@@ -1,5 +1,5 @@
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
-import 'package:sqflite_entity_mapper_orm/src/db_operations/interfaces/db_operation.dart';
+import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/src/db_operations/interfaces/db_operation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
 

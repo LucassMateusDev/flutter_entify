@@ -1,8 +1,8 @@
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_entity_mapper_orm/src/exceptions/sqlite_data_mapper_exception.dart';
+import 'package:entify/src/exceptions/sqlite_data_mapper_exception.dart';
 
-import 'package:sqflite_entity_mapper_orm/src/transactions/transaction_operations.dart';
+import 'package:entify/src/transactions/transaction_operations.dart';
 
 import '../../sqflite_entity_mapper_orm.dart';
 
@@ -87,5 +87,11 @@ class SqliteDbTransaction implements TransactionOperations {
       whereArgs: whereArgs,
       conflictAlgorithm: ConflictAlgorithm.rollback,
     );
+  }
+
+  void execute(String sql) {
+    _checkOpenTransaction();
+
+    _batch!.execute(sql);
   }
 }

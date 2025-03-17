@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'package:entify/sqflite_entity_mapper_orm.dart';
 
 import '../exceptions/sqlite_data_mapper_exception.dart';
 

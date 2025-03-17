@@ -17,6 +17,7 @@ export 'src/entities/db_entity.dart';
 export 'src/entities/db_entity_register.dart';
 export 'src/entities/db_entity_columns.dart';
 export 'src/entities/db_entity_foreign_key.dart';
+export 'src/entities/db_entity_provider.dart';
 
 // Generics
 export 'src/generics/sqlite_generic_repository.dart';
