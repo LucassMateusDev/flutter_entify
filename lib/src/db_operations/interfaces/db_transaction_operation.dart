@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/transactions/sqlite_db_transaction.dart';
 
 abstract interface class DbTransactionOperation<E> {

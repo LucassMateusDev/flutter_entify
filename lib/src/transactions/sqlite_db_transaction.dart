@@ -4,7 +4,7 @@ import 'package:entify/src/exceptions/sqlite_data_mapper_exception.dart';
 
 import 'package:entify/src/transactions/transaction_operations.dart';
 
-import '../../sqflite_entity_mapper_orm.dart';
+import '../../entify.dart';
 
 class SqliteDbTransaction implements TransactionOperations {
   Batch? _batch;

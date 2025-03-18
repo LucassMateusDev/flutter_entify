@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 
 mixin DbAutoEntityMapper on DbContext {
   List<DbEntityMapper> get mappings;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/entities/db_entity_definition.dart';
 
 class MigrationMetadata {
