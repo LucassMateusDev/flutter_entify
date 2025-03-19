@@ -27,9 +27,7 @@ dependencies:
     sdk: flutter
   sqflite: ^2.3.2
   sqflite_common: ^2.5.4
-  dart_class_mapper:
-    git:
-      url: https://github.com/LucassMateus/dart_class_mapper
+  dart_class_mapper: ^1.0.0
   meta: ^1.15.0
 
 dev_dependencies:
