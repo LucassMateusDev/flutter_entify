@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/db_operations/operations/delete_operation.dart';
 import 'package:entify/src/db_operations/operations/select_operation.dart';
 import 'package:entify/src/db_operations/operations/insert_operation.dart';

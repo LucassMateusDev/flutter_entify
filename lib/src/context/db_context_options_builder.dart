@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 
 class DbContextOptionsBuilder {
   final DbContextOptions _options = DbContextOptions();

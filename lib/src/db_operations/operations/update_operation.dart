@@ -1,4 +1,4 @@
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/db_operations/interfaces/db_operation.dart';
 
 class UpdateOperation<T> implements DbOperation<T, void> {

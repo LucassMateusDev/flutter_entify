@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/entities/db_entity_definition.dart';
 import 'package:entify/src/migrations/auto_migrations/metadata/migration_metadata_table.dart';
 

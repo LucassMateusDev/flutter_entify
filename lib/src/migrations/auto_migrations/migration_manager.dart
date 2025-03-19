@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:sqflite_common/sqlite_api.dart';
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/entities/db_entity_definition.dart';
 import 'package:entify/src/migrations/auto_migrations/metadata/migration_metadata.dart';
 import 'package:entify/src/migrations/auto_migrations/metadata/migration_metadata_table.dart';
