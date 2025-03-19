@@ -23,8 +23,8 @@ export 'src/entities/db_entity_provider.dart';
 export 'src/generics/sqlite_generic_repository.dart';
 
 // Mappers
-export 'src/mappers/create_db_map.dart';
-export 'src/mappers/db_entity_mapper.dart';
+export 'src/mappers/create_db_entity_map.dart';
+export 'src/mappers/get_db_entity_map.dart';
 
 // Migrations
 export 'src/migrations/i_migration.dart';

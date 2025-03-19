@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:entify/entify.dart';
 
 mixin DbAutoEntityMapper on DbContext {
-  List<DbEntityMapper> get mappings;
+  List<CreateDbEntityMap> get mappings;
 
   @override
   FutureOr<void> binds() {

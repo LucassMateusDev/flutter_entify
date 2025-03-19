@@ -19,7 +19,7 @@ class DbContextOptionsBuilder {
     return this;
   }
 
-  DbContextOptionsBuilder mappings(List<DbEntityMapper> mappings) {
+  DbContextOptionsBuilder mappings(List<CreateDbEntityMap> mappings) {
     _options.mappings = mappings;
     return this;
   }

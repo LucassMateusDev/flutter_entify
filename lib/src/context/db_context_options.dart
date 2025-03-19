@@ -10,7 +10,7 @@ class DbContextOptions {
   bool _withAutoMigrations = false;
   List<IMigration> _migrations = [];
   List<DbEntity> entities = [];
-  List<DbEntityMapper> mappings = [];
+  List<CreateDbEntityMap> mappings = [];
 
   @experimental
   set withAutoMigrations(bool value) {

@@ -1,14 +1,9 @@
 import 'dart:async';
 
+import 'package:entify/entify.dart';
 import 'package:flutter/foundation.dart';
 import 'package:entify/src/config/data_base_config.dart';
-import 'package:entify/src/connection/sqlite_db_connection.dart';
-import 'package:entify/src/context/db_context_options.dart';
-import 'package:entify/src/context/db_context_options_builder.dart';
-import 'package:entify/src/entities/db_entity.dart';
 import 'package:entify/src/entities/db_entity_service.dart';
-import 'package:entify/src/mappers/db_entity_mapper.dart';
-import 'package:entify/src/set/db_set.dart';
 import 'package:entify/src/transactions/sqlite_db_transaction.dart';
 
 abstract class DbContext {
@@ -60,7 +55,7 @@ abstract class DbContext {
     }
   }
 
-  void createMappings(List<DbEntityMapper> dbMappings) {
+  void createMappings(List<CreateDbEntityMap> dbMappings) {
     for (final dbMapper in dbMappings) {
       dbMapper.create();
     }
