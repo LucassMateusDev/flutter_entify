@@ -52,12 +52,11 @@ packages:
   dart_class_mapper:
     dependency: transitive
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "3b2faa4bf40c19890d2cde165a609caf85ccca0b"
-      url: "https://github.com/LucassMateus/dart_class_mapper"
-    source: git
-    version: "0.0.1"
+      name: dart_class_mapper
+      sha256: b3ff4241ac2a063b71e88d7b532099a559f67fed599c030a96e69ad5198ab45b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   entify:
     dependency: "direct main"
     description:
