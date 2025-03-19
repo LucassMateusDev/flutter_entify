@@ -1,4 +1,4 @@
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/query/sqlite_query_result.dart';
 
 mixin SqliteDbEntityQueryBuilderOperations<T> {

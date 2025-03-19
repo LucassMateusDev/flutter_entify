@@ -1,4 +1,4 @@
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/db_operations/interfaces/db_operation.dart';
 import 'package:entify/src/exceptions/sqlite_data_mapper_exception.dart';
 // ignore: depend_on_referenced_packages

@@ -1,4 +1,4 @@
-import 'package:entify/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 import 'package:entify/src/db_operations/interfaces/db_transaction_operation.dart';
 import 'package:entify/src/transactions/sqlite_db_transaction.dart';
 
