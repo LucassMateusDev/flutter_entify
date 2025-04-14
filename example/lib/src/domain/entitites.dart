@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class Role {
-  final int? id;
+  int? id;
   final String name;
   final String description;
 
@@ -19,6 +19,18 @@ class Role {
 
   @override
   int get hashCode => id.hashCode ^ name.hashCode ^ description.hashCode;
+
+  Role copyWith({
+    int? id,
+    String? name,
+    String? description,
+  }) {
+    return Role(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+    );
+  }
 }
 
 class User {
@@ -43,6 +55,20 @@ class User {
   @override
   int get hashCode {
     return id.hashCode ^ name.hashCode ^ email.hashCode ^ roles.hashCode;
+  }
+
+  User copyWith({
+    int? id,
+    String? name,
+    String? email,
+    List<Role>? roles,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      roles: roles ?? this.roles,
+    );
   }
 }
 

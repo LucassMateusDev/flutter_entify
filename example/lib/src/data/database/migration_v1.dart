@@ -16,6 +16,16 @@ class MigrationV1 implements IMigration {
         name TEXT NOT NULL
       );
     ''');
+    batch.execute('''
+      CREATE TABLE UserRoles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userId INTEGER NOT NULL,
+        roleId INTEGER NOT NULL,
+        UNIQUE (userId, roleId),
+        FOREIGN KEY (userId) REFERENCES Users(id),
+        FOREIGN KEY (roleId) REFERENCES Roles(id)
+      );
+    ''');
   }
 
   @override

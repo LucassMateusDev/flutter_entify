@@ -1,5 +1,5 @@
-import 'package:example/data/database/app_db_context.dart';
-import 'package:example/domain/entitites.dart';
+import 'package:example/src/data/database/app_db_context.dart';
+import 'package:example/src/domain/entitites.dart';
 import 'package:flutter/foundation.dart';
 
 class UserRepository {
@@ -40,7 +40,7 @@ class UserRepository {
     return users;
   }
 
-  Future<void> insert(User entity) async {
+  Future<int> insert(User entity) async {
     await dbContext.openTransaction();
     dbContext.insert(entity);
 
@@ -48,7 +48,8 @@ class UserRepository {
       dbContext.insert(UserRoles(idRole: role.id!, idUser: entity.id!));
     }
 
-    await dbContext.saveChangesAsync();
+    final results = await dbContext.saveChangesAsync();
+    return results.first as int;
   }
 
   Future<void> update(User entity) async {

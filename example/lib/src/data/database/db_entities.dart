@@ -1,5 +1,5 @@
 import 'package:entify/entify.dart';
-import 'package:example/domain/entitites.dart';
+import 'package:example/src/domain/entitites.dart';
 
 class DbEntitites {
   static List<DbEntity> get() {
@@ -76,6 +76,11 @@ class UserRolesDbEntity extends DbEntityProvider<UserRoles> {
           .builder
           .name('UserRoles')
           .primaryKey((e) => {'id': e.id})
+          .uniqueKeys(
+            (e) => [
+              {'idRole': e.idRole, 'idUser': e.idUser},
+            ],
+          )
           .mapToEntity(
             (map) => UserRoles(
               id: map['id'] as int?,

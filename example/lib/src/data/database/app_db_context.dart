@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:entify/entify.dart';
-import 'package:example/data/database/db_entities.dart';
-import 'package:example/domain/entitites.dart';
+import 'package:example/src/data/database/db_entities.dart';
+import 'package:example/src/domain/entitites.dart';
 
 class AppDbContext extends DbContext with DbTransactionOperations {
   final users = DbSet<User>();
