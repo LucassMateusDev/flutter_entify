@@ -1,9 +1,5 @@
-import 'package:example/src/data/database/app_db_context.dart';
-import 'package:example/src/data/repositories/role_repository.dart';
-import 'package:example/src/data/repositories/user_repository.dart';
 import 'package:example/src/ui/pages/example_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
