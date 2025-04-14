@@ -10,7 +10,10 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
-# Entify
+<div align="center">
+  <img src="example/assets/images/logo.png" alt="Logo" width="300"/>
+</div>
+
 
 Entify é um package baseado no .NET Entity Framework, com ele é possível de forma simplificada criar um banco de dados, mapear entidades para o banco de dados e executar queries. Além disso fornece suporte para transações e migrations e classes auxiliares para realizar operações de CRUD.
 
@@ -30,14 +33,14 @@ Entify é um package baseado no .NET Entity Framework, com ele é possível de f
 Adicione o **Entify** ao seu projeto usando o **pub.dev**:
 
 ```sh
-flutter pub add flite_entity
+flutter pub add entify
 ```
 
 ou no pubspec.yaml:
 
 ```sh
 dependencies:
-  flite_entity: ^1.0.0
+  entify: ^1.0.0
 ```
 
 ---
@@ -186,4 +189,4 @@ await dbContext.roles.findAll();
 dbContext.example.deleteAsync(example);
 ```
 
-**📌 Exemplos de uso com transações estão disponíveis na aba Example.**
+### 📌 Exemplos de uso com transações estão disponíveis na aba Example.

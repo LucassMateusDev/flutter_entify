@@ -5,7 +5,7 @@ long_description: |
   It provides an easy way to map entities, execute crud operations and simplify SQL queries. 
   Supports transactions, foreign keys, migrations, and query chaining.
 
-repository: https://github.com/LucassMateus/sqflite_entity_mapper_orm
+repository: https://github.com/LucassMateus/entify
 
 topics:
   - orm
@@ -14,7 +14,7 @@ topics:
   - entity-mapper
   - database
 
-homepage: https://github.com/LucassMateus/sqflite_entity_mapper_orm
+homepage: https://github.com/LucassMateus/entify
 
 version: 0.0.1
 

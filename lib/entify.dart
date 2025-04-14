@@ -1,4 +1,4 @@
-library sqflite_entity_mapper_orm;
+library entify;
 
 // Connection
 export 'src/connection/sqlite_adm_connection.dart';
