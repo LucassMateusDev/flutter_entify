@@ -7,10 +7,11 @@ import 'package:example/src/domain/entitites.dart';
 class AppDbContext extends DbContext with DbTransactionOperations {
   final users = DbSet<User>();
   final roles = DbSet<Role>();
-  final userRoles = DbSet<UserRoles>();
+  // final userRoles = DbSet<UserRoles>();
 
   @override
-  List<DbSet> get dbSets => [users, roles, userRoles];
+  // List<DbSet> get dbSets => [users, roles, userRoles];
+  List<DbSet> get dbSets => [users, roles];
 
   @override
   FutureOr<void> binds() async {

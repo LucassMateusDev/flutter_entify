@@ -7,6 +7,7 @@ class DbEntity<T> {
   Map<String, dynamic> Function(T e) primaryKey;
   List<Map<String, dynamic>> Function(T e) uniqueKeys;
   List<DbEntityColumn> columns;
+  List<DbEntityRelation<T, dynamic>> relations;
   // final Map<String, List<String>> indexes;
 
   DbEntity({
@@ -16,6 +17,7 @@ class DbEntity<T> {
     required this.primaryKey,
     required this.columns,
     List<Map<String, dynamic>> Function(T e)? uniqueKeys,
+    this.relations = const [],
     // this.indexes = const {},
   }) : uniqueKeys = uniqueKeys ?? ((T e) => []);
 

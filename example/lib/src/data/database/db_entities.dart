@@ -6,7 +6,7 @@ class DbEntitites {
     return [
       RoleDbEntity().entity,
       UserDbEntity().entity,
-      UserRolesDbEntity().entity,
+      // UserRolesDbEntity().entity,
     ];
   }
 }
@@ -44,19 +44,19 @@ class RoleDbEntity extends DbEntityProvider<Role> {
 class UserDbEntity extends DbEntityProvider<User> {
   @override
   DbEntity get entity => super
-          .builder
-          .name('Users')
-          .primaryKey((e) => {'id': e.id})
-          .mapToEntity(
-            (map) => User(
-              id: map['id'] as int?,
-              name: map['name'] as String,
-              email: map['email'] ?? '',
-              roles: [],
-            ),
-          )
-          .toUpdateOrInsert((e) => {'name': e.name, 'email': e.email})
-          .columns(
+      .builder
+      .name('Users')
+      .primaryKey((e) => {'id': e.id})
+      .mapToEntity(
+        (map) => User(
+          id: map['id'] as int?,
+          name: map['name'] as String,
+          email: map['email'] ?? '',
+          roles: [],
+        ),
+      )
+      .toUpdateOrInsert((e) => {'name': e.name, 'email': e.email})
+      .columns(
         [
           IntColumn(
             name: 'id',
@@ -67,38 +67,48 @@ class UserDbEntity extends DbEntityProvider<User> {
           TextColumn(name: 'name', isNullable: false),
           TextColumn(name: 'email'),
         ],
-      ).build();
+      )
+      .addRelation<Role>(DbEntityRelation(
+          name: 'UserRoles',
+          mapToEntity: (map) => Role(name: map['name'], description: ),
+          toUpdateOrInsert: (user) => user.roles
+              .map((role) => {
+                    'idUser': user.id,
+                    'idRole': role.id,
+                  })
+              .toList()))
+      .build();
 }
 
-class UserRolesDbEntity extends DbEntityProvider<UserRoles> {
-  @override
-  DbEntity get entity => super
-          .builder
-          .name('UserRoles')
-          .primaryKey((e) => {'id': e.id})
-          .uniqueKeys(
-            (e) => [
-              {'idRole': e.idRole, 'idUser': e.idUser},
-            ],
-          )
-          .mapToEntity(
-            (map) => UserRoles(
-              id: map['id'] as int?,
-              idRole: map['idRole'] as int,
-              idUser: map['idUser'] as int,
-            ),
-          )
-          .toUpdateOrInsert((e) => {'idRole': e.idRole, 'idUser': e.idUser})
-          .columns(
-        [
-          IntColumn(
-            name: 'id',
-            isPrimaryKey: true,
-            isNullable: false,
-            isAutoIncrement: true,
-          ),
-          IntColumn(name: 'idRole', isNullable: false),
-          IntColumn(name: 'idUser', isNullable: false),
-        ],
-      ).build();
-}
+// class UserRolesDbEntity extends DbEntityProvider<UserRoles> {
+//   @override
+//   DbEntity get entity => super
+//           .builder
+//           .name('UserRoles')
+//           .primaryKey((e) => {'id': e.id})
+//           .uniqueKeys(
+//             (e) => [
+//               {'idRole': e.idRole, 'idUser': e.idUser},
+//             ],
+//           )
+//           .mapToEntity(
+//             (map) => UserRoles(
+//               id: map['id'] as int?,
+//               idRole: map['idRole'] as int,
+//               idUser: map['idUser'] as int,
+//             ),
+//           )
+//           .toUpdateOrInsert((e) => {'idRole': e.idRole, 'idUser': e.idUser})
+//           .columns(
+//         [
+//           IntColumn(
+//             name: 'id',
+//             isPrimaryKey: true,
+//             isNullable: false,
+//             isAutoIncrement: true,
+//           ),
+//           IntColumn(name: 'idRole', isNullable: false),
+//           IntColumn(name: 'idUser', isNullable: false),
+//         ],
+//       ).build();
+// }

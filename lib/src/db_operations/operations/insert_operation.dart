@@ -11,16 +11,34 @@ class InsertOperation<T> implements DbOperation<T, int> {
     T entity,
   ) async {
     try {
-      final db = await connection.open();
+      // final db = await connection.open();
       final values = dbEntity.toUpdateOrInsert(entity);
 
-      final id = await db.insert(
-        dbEntity.name,
-        values,
-        conflictAlgorithm: ConflictAlgorithm.rollback,
-      );
+      final transaction = connection.getTransaction;
+      await transaction.open();
+      final sql =
+          'INSERT INTO ${dbEntity.name} (${values.keys.join(', ')}) VALUES (${values.values.map((e) => "'$e'").join(', ')})';
+      transaction.execute(sql);
 
-      return id;
+      // final id = await db.insert(
+      //   dbEntity.name,
+      //   values,
+      //   conflictAlgorithm: ConflictAlgorithm.rollback,
+      // );
+
+      for (final relation in dbEntity.relations) {
+        final values = relation.mapRelation(entity);
+
+        for (final value in values) {
+          final sql =
+              'INSERT INTO ${relation.name} (${value.keys.join(', ')}) VALUES (${value.values.map((e) => "'$e'").join(', ')})';
+          transaction.execute(sql);
+        }
+      }
+
+      final result = await transaction.commit(noResult: false);
+
+      return result.first as int;
     } finally {
       await connection.close();
     }

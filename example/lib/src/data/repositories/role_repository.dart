@@ -16,17 +16,17 @@ class RoleRepository extends SqliteGenericRepository<Role> {
       await super.dbSet.insertAsync(entity);
 
   Future<void> delete(Role entity) async {
-    final relatedUsers = await dbContext //
-        .userRoles
-        .findAll('idRole = ${entity.id}');
+    // final relatedUsers = await dbContext //
+    //     .userRoles
+    //     .findAll('idRole = ${entity.id}');
 
-    await dbContext.openTransaction();
+    // await dbContext.openTransaction();
 
-    for (var userRole in relatedUsers) {
-      dbContext.delete(userRole);
-    }
+    // for (var userRole in relatedUsers) {
+    //   dbContext.delete(userRole);
+    // }
 
-    dbContext.delete(entity);
-    await dbContext.saveChangesAsync();
+    // dbContext.delete(entity);
+    // await dbContext.saveChangesAsync();
   }
 }

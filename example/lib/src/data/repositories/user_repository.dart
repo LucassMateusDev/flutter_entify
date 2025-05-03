@@ -41,35 +41,37 @@ class UserRepository {
   }
 
   Future<int> insert(User entity) async {
-    await dbContext.openTransaction();
-    dbContext.insert(entity);
+    // await dbContext.openTransaction();
+    // dbContext.insert(entity);
 
-    for (var role in entity.roles) {
-      dbContext.insert(UserRoles(idRole: role.id!, idUser: entity.id!));
-    }
+    // for (var role in entity.roles) {
+    //   dbContext.insert(UserRoles(idRole: role.id!, idUser: entity.id!));
+    // }
 
-    final results = await dbContext.saveChangesAsync();
-    return results.first as int;
+    // final results = await dbContext.saveChangesAsync();
+    // return results.first as int;
+    return await dbContext.users.insertAsync(entity);
   }
 
   Future<void> update(User entity) async {
-    final relatedRoles = await dbContext //
-        .userRoles
-        .findAll('idUser = ${entity.id}');
+    // final relatedRoles = await dbContext //
+    //     .userRoles
+    //     .findAll('idUser = ${entity.id}');
 
-    await dbContext.openTransaction();
+    // await dbContext.openTransaction();
 
-    for (var role in relatedRoles) {
-      dbContext.delete(role);
-    }
+    // for (var role in relatedRoles) {
+    //   dbContext.delete(role);
+    // }
 
-    dbContext.update(entity);
+    // dbContext.update(entity);
 
-    for (var role in entity.roles) {
-      dbContext.insert(UserRoles(idRole: role.id!, idUser: entity.id!));
-    }
+    // for (var role in entity.roles) {
+    //   dbContext.insert(UserRoles(idRole: role.id!, idUser: entity.id!));
+    // }
 
-    await dbContext.saveChangesAsync();
+    // await dbContext.saveChangesAsync();
+    await dbContext.users.updateAsync(entity);
   }
 
   Future<void> delete(User entity) async {
