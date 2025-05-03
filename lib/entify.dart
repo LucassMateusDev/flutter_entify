@@ -36,5 +36,3 @@ export 'src/query/query_mixin.dart';
 
 // DbSet
 export 'src/set/db_set.dart';
-
-export 'src/entities/db_entity_builder.dart';

@@ -9,7 +9,6 @@ class DbEntityBuilder<T> {
   Map<String, dynamic> Function(T e) _primaryKey = (T e) => {};
   List<Map<String, dynamic>> Function(T e) _uniqueKeys = (T e) => [];
   List<DbEntityColumn> _columns = [];
-  List<DbEntityRelation<T, dynamic>> _relations = [];
 
   String get entityName => _name.isEmpty ? T.toString() : _name;
 
@@ -53,11 +52,6 @@ class DbEntityBuilder<T> {
     return this;
   }
 
-  DbEntityBuilder<T> addRelation<R>(DbEntityRelation<T, R> relation) {
-    _relations.add(relation);
-    return this;
-  }
-
   DbEntity<T> build() {
     if (_mapToEntity == null) {
       throw SqliteDataMapperException(
@@ -71,23 +65,6 @@ class DbEntityBuilder<T> {
       primaryKey: _primaryKey,
       uniqueKeys: _uniqueKeys,
       columns: _columns,
-      relations: _relations,
     );
   }
-}
-
-class DbEntityRelation<T, R> {
-  final String _name;
-  final List<Map<String, dynamic>> Function(T e) toUpdateOrInsert;
-  R Function(Map<String, dynamic> map) mapToEntity;
-
-  DbEntityRelation({
-    String name = '',
-    required this.toUpdateOrInsert,
-    required this.mapToEntity,
-  }) : _name = name;
-
-  String get name => _name.isEmpty ? '${T.toString()}_${R.toString()}' : _name;
-  Type get entityType => T;
-  Type get relatedEntityType => R;
 }
