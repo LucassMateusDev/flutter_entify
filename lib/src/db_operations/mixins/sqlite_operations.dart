@@ -5,7 +5,7 @@ import 'package:entify/src/db_operations/operations/select_operation.dart';
 import 'package:entify/src/db_operations/operations/insert_operation.dart';
 import 'package:entify/src/db_operations/operations/update_operation.dart';
 
-import '../../exceptions/sqlite_data_mapper_exception.dart';
+import '../../exceptions/entify_exception.dart';
 
 mixin SqliteOperations<T> {
   SqliteDbConnection get connection;
@@ -31,7 +31,7 @@ mixin SqliteOperations<T> {
   Future<int> insertAsync(T entity) async {
     final id = await insertOperation(connection, dbEntity, entity);
 
-    if (id == 0) throw SqliteDataMapperException('Error on insert entity');
+    if (id == 0) throw EntifyException('Error on insert entity');
 
     return id;
   }

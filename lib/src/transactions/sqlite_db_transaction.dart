@@ -1,7 +1,7 @@
 // ignore: depend_on_referenced_packages
 import 'package:entify/entify.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:entify/src/exceptions/sqlite_data_mapper_exception.dart';
+import 'package:entify/src/exceptions/entify_exception.dart';
 
 import 'package:entify/src/transactions/transaction_operations.dart';
 
@@ -11,7 +11,7 @@ class SqliteDbTransaction implements TransactionOperations {
   bool get isOpen => _batch != null;
 
   void _checkOpenTransaction() {
-    if (!isOpen) throw SqliteDataMapperException('No open transaction');
+    if (!isOpen) throw EntifyException('No open transaction');
   }
 
   Future<List<Object?>> commit({
@@ -33,7 +33,7 @@ class SqliteDbTransaction implements TransactionOperations {
   }
 
   Future<void> open() async {
-    if (isOpen) throw SqliteDataMapperException('Transaction already open');
+    if (isOpen) throw EntifyException('Transaction already open');
 
     final batch = await SqliteDbConnection.get().getBatch;
 
