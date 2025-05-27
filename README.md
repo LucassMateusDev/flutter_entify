@@ -47,7 +47,7 @@ dependencies:
 
 ## Getting started
 
-Antes de usar o Entify, é necessário configurar as entidades e o DbContext, que será responsável pela comunicação com o banco de dados.
+Antes de usar o Entify, é necessário configurar o DbContext, que será responsável pela comunicação com o banco de dados.
 
 ## 1️⃣ Criando uma Entidade
 
@@ -61,51 +61,10 @@ class Example {
   Example({required this.id, required this.name});  
 }
 ```
-## 2️⃣ Criando a Definição da Entidade (DbEntity)
 
+## 2️⃣ Criando o DbContext
 
-**✅ Opção 1: Criando um DbEntity manualmente**
-
-**📌 Se você não for usar AutoMigrations, não precisa fornecer as Columns.**
-```dart
-class DataBaseEntities {
-  static DbEntity<Example> get example => DbEntity<Example>(
-        name: 'Example',
-        mapToEntity: (map) => Example(id: map['id'] as int, name: map['name'] as String),
-        toUpdateOrInsert: (e) => {'id': e.id, 'name': e.name},
-        primaryKey: (e) => {'id': e.id},
-        columns: [
-          IntColumn(name: 'id', isPrimaryKey: true, isNullable: false),
-          TextColumn(name: 'name', isNullable: false),
-        ],
-      );
-}
-```
-
-**✅ Opção 2: Usando DbEntityProvider**
-```dart
-class ExampleDbEntity extends DbEntityProvider<Example> {
-  @override
-  DbEntity<Example> get entity => super
-          .builder
-          .name('Example')
-          .mapToEntity((map) => Example(id: map['id'] as int, name: map['name'] as String))
-          .toUpdateOrInsert((e) => {'id': e.id, 'name': e.name})
-          .primaryKey((e) => {'id': e.id})
-          .columns(
-        [
-          IntColumn(name: 'id', isPrimaryKey: true, isNullable: false),
-          TextColumn(name: 'name', isNullable: false),
-        ],
-      ).build();
-}
-
-```
-
-
-## 3️⃣ Criando o DbContext
-
-Para configurar o banco de dados e gerenciar entidades, crie uma classe que estenda DbContext. Isso permitirá definir os DbSets e sobrescrever o método onConfiguring para configurar a conexão e o comportamento do banco.
+Para configurar o banco de dados e gerenciar entidades, crie uma classe que estenda DbContext. Isso permitirá definir os DbSets e sobrescrever os métodos onConfiguring para configurar a conexão e o comportamento do banco e configureEntites para declarar as entidades do banco.
 ```dart
 class AppDbContext extends DbContext {
   final example = DbSet<Example>();
@@ -120,11 +79,27 @@ class AppDbContext extends DbContext {
     optionsBuilder
         .databaseName('example')
         .version(1)
-        .entities([ExampleDbEntity().entity])
         //.migrations([MigrationV1()]); // Para usar migrations manuais, descomente esta linha
         .withAutoMigrations();
     super.onConfiguring(optionsBuilder);
   }
+
+  @override
+  List<DbEntity> configureEntites(DbEntityBuilderProvider provider) => [
+        provider
+            .getDefaultDbEntityBuilder<Example>()
+            //Se você quiser alterar o nome da tabela, por padrão será o nome da entidade
+            //.name('example_table')
+            .mapToEntity((map) =>Example(id: map['id'] as int, name: map['name'] as String))
+            .toUpdateOrInsert((e) => {'id': e.id, 'name': e.name})
+            .primaryKey((e) => {'id': e.id})
+            .columns(
+          [
+            IntColumn(name: 'id', isPrimaryKey: true, isNullable: false),
+            TextColumn(name: 'name', isNullable: false),
+          ],
+        ).build()
+      ];
 }
 ```
 
@@ -132,19 +107,31 @@ class AppDbContext extends DbContext {
 
 Se não quiser usar AutoMigrations, crie uma classe de migration para cada versão do banco.
 ```dart
-class MigrationV1 implements IMigration {
+class MigrationV1 extends CreateMigration {
   @override
-  void create(Batch batch) {
-    batch.execute('''
+  void execute(BatchSchemaExecutor executor) {
+    executor.execute('''
       CREATE TABLE Example (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL
       );
     ''');
   }
+}
+
+class MigrationV2 extends UpdateMigration {
+  @override
+  int get version => 2;
 
   @override
-  void update(Batch batch) {}
+  void execute(BatchSchemaExecutor executor) {
+    executor.execute('''
+      CREATE TABLE Example2 (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        description TEXT NOT NULL
+      );
+    ''');
+  }
 }
 ```
 
