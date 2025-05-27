@@ -14,7 +14,7 @@ class DbEntity<T> {
     required this.mapToEntity,
     required this.toUpdateOrInsert,
     required this.primaryKey,
-    required this.columns,
+    this.columns = const [],
     List<Map<String, dynamic>> Function(T e)? uniqueKeys,
     // this.indexes = const {},
   }) : uniqueKeys = uniqueKeys ?? ((T e) => []);
