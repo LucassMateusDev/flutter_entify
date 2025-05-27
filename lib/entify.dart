@@ -18,6 +18,8 @@ export 'src/entities/db_entity_register.dart';
 export 'src/entities/db_entity_columns.dart';
 export 'src/entities/db_entity_foreign_key.dart';
 export 'src/entities/db_entity_provider.dart';
+export 'src/entities/builder/db_entity_builder.dart';
+export 'src/entities/builder/db_entity_builder_provider.dart';
 
 // Generics
 export 'src/generics/sqlite_generic_repository.dart';
@@ -27,7 +29,10 @@ export 'src/mappers/create_db_entity_map.dart';
 export 'src/mappers/get_db_entity_map.dart';
 
 // Migrations
-export 'src/migrations/i_migration.dart';
+// export 'src/migrations/i_migration.dart';
+export 'src/migrations/batch_schema_executor.dart';
+export 'src/migrations/create_migration.dart';
+export 'src/migrations/update_migration.dart';
 export 'src/migrations/auto_migrations/migration_manager.dart';
 
 // Query
