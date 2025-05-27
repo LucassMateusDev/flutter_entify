@@ -1,4 +1,4 @@
-import '../exceptions/sqlite_data_mapper_exception.dart';
+import '../exceptions/entify_exception.dart';
 import 'i_migration.dart';
 
 class SqliteMigrationFactory {
@@ -7,7 +7,7 @@ class SqliteMigrationFactory {
 
   static SqliteMigrationFactory get i {
     if (_instance == null) {
-      throw SqliteDataMapperException(
+      throw EntifyException(
           'SqliteMigrationFactory não foi inicializado. Chame SqliteMigrationFactory.initialize().');
     }
     return _instance!;
@@ -20,8 +20,9 @@ class SqliteMigrationFactory {
   }
 
   List<IMigration> getUpgradeMigration(int version) {
-    final upgradeMigrations = migrations.sublist(version);
-
-    return upgradeMigrations;
+    return migrations //
+        .where((migration) => migration.version > version)
+        .toList()
+      ..sort((a, b) => a.version.compareTo(b.version));
   }
 }

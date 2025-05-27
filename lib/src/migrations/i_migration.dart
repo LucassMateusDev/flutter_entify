@@ -1,7 +1,7 @@
 // ignore: depend_on_referenced_packages
-import 'package:sqflite/sqflite.dart';
+import 'package:entify/src/migrations/batch_schema_executor.dart';
 
 abstract interface class IMigration {
-  void create(Batch batch);
-  void update(Batch batch);
+  int get version;
+  void execute(BatchSchemaExecutor executor);
 }

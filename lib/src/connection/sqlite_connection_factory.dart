@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:entify/src/migrations/batch_schema_executor.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -66,7 +67,7 @@ class SqliteConnectionFactory {
     if (_db == null) {
       var databasePath = await getDatabasesPath();
       var databaseFile = join(databasePath, name);
-      debugPrint(databaseFile);
+      // debugPrint(databaseFile);
 
       await _lock.synchronized(() async {
         _db ??= await openDatabase(
@@ -88,6 +89,7 @@ class SqliteConnectionFactory {
 
   Future<void> _onCreate(Database db, int version) async {
     final batch = db.batch();
+    final executor = BatchSchemaExecutor(batch);
 
     if (withAutoMigrations) {
       final migration = await MigrationManager.getMigrations(
@@ -102,13 +104,14 @@ class SqliteConnectionFactory {
 
     final migrations = migrationFactory.migrations;
     for (var migration in migrations) {
-      migration.create(batch);
+      migration.execute(executor);
     }
     await batch.commit();
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     final batch = db.batch();
+    final executor = BatchSchemaExecutor(batch);
 
     if (withAutoMigrations) {
       final migration = await MigrationManager.getMigrations(
@@ -125,7 +128,7 @@ class SqliteConnectionFactory {
     final upgradeMigrations = migrationFactory.getUpgradeMigration(oldVersion);
 
     for (var migration in upgradeMigrations) {
-      migration.update(batch);
+      migration.execute(executor);
     }
     await batch.commit();
   }
@@ -135,7 +138,7 @@ class SqliteConnectionFactory {
   }
 
   Future<void> closeConnection() async {
-    _db = null;
     await _db?.close();
+    _db = null;
   }
 }
