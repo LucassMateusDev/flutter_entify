@@ -1,3 +1,4 @@
+import 'package:entify/src/migrations/i_migration.dart';
 import 'package:meta/meta.dart';
 import 'package:entify/entify.dart';
 
@@ -14,10 +15,10 @@ class DbContextOptionsBuilder {
     return this;
   }
 
-  DbContextOptionsBuilder entities(List<DbEntity> entities) {
-    _options.entities = entities;
-    return this;
-  }
+  // DbContextOptionsBuilder entities(List<DbEntity> entities) {
+  //   _options.entities = entities;
+  //   return this;
+  // }
 
   DbContextOptionsBuilder mappings(List<CreateDbEntityMap> mappings) {
     _options.mappings = mappings;

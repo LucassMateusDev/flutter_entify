@@ -28,6 +28,8 @@ abstract class DbContext {
     options = optionsBuilder.build();
   }
 
+  List<DbEntity> configureEntites(DbEntityBuilderProvider provider);
+
   Future<void> initialize() async {
     DataBaseConfig.initialize(
       name: options.databaseName,
@@ -37,6 +39,8 @@ abstract class DbContext {
     );
     dbEntityService = DbEntityService.i;
     dbConnection = SqliteDbConnection.get();
+    final entities = configureEntites(DbEntityBuilderProvider());
+    registerEntities(entities);
     await _optionsHandler();
     dbSetsInitialize(dbSets);
     await _executeBindsIfNotExecutedBefore();
@@ -62,14 +66,14 @@ abstract class DbContext {
   }
 
   Future<void> _optionsHandler() async {
-    if (options.hasEntities) _setDbEntitiesFromOptions();
+    // if (options.hasEntities) _setDbEntitiesFromOptions();
     if (options.hasMappings) _setDbMappingsFromOptions();
     if (options.executeBindsBeforeInitialize) await binds();
   }
 
-  void _setDbEntitiesFromOptions() {
-    registerEntities(options.entities);
-  }
+  // void _setDbEntitiesFromOptions() {
+  // registerEntities(options.entities);
+  // }
 
   void _setDbMappingsFromOptions() {
     createMappings(options.mappings);
