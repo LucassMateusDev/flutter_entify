@@ -29,11 +29,9 @@ export 'src/mappers/create_db_entity_map.dart';
 export 'src/mappers/get_db_entity_map.dart';
 
 // Migrations
-// export 'src/migrations/i_migration.dart';
 export 'src/migrations/batch_schema_executor.dart';
 export 'src/migrations/create_migration.dart';
 export 'src/migrations/update_migration.dart';
-export 'src/migrations/auto_migrations/migration_manager.dart';
 
 // Query
 export 'src/query/db_query.dart';
