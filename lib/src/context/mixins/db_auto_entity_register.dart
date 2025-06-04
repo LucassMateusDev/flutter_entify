@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 mixin DbAutoEntityRegister on DbContext {
   List<DbEntity> get entities;

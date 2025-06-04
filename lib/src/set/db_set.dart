@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore: depend_on_referenced_packages
 import 'package:flutter/material.dart';
-import 'package:entify/src/db_operations/mixins/sqlite_entity_operations.dart';
-import 'package:entify/src/db_operations/mixins/sqlite_operations.dart';
+import 'package:flutter_entify/src/db_operations/mixins/sqlite_entity_operations.dart';
+import 'package:flutter_entify/src/db_operations/mixins/sqlite_operations.dart';
 
 import '../connection/sqlite_db_connection.dart';
 import '../entities/db_entity_service.dart';

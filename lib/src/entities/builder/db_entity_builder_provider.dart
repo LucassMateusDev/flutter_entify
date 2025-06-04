@@ -1,4 +1,4 @@
-import 'package:entify/src/entities/builder/db_entity_builder.dart';
+import 'package:flutter_entify/src/entities/builder/db_entity_builder.dart';
 
 class DbEntityBuilderProvider {
   DefaultDbEntityBuilder<T> getDefaultDbEntityBuilder<T>() {

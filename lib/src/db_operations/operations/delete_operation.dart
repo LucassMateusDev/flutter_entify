@@ -1,5 +1,5 @@
-import 'package:entify/entify.dart';
-import 'package:entify/src/db_operations/interfaces/db_operation.dart';
+import 'package:flutter_entify/flutter_entify.dart';
+import 'package:flutter_entify/src/db_operations/interfaces/db_operation.dart';
 
 class DeleteOperation<T> implements DbOperation<T, void> {
   @override

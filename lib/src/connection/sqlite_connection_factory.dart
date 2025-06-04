@@ -1,11 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:entify/src/migrations/batch_schema_executor.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_entify/src/migrations/batch_schema_executor.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:entify/src/entities/db_entity_service.dart';
-import 'package:entify/src/migrations/auto_migrations/migration_manager.dart';
+import 'package:flutter_entify/src/entities/db_entity_service.dart';
+import 'package:flutter_entify/src/migrations/auto_migrations/migration_manager.dart';
 import 'package:synchronized/synchronized.dart';
 
 import '../migrations/sqlite_migration_factory.dart';

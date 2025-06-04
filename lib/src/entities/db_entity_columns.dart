@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 enum ColumnType {
   integer('INTEGER'),

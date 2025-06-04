@@ -1,4 +1,4 @@
-import 'package:entify/src/migrations/auto_migrations/metadata/migration_metadata.dart';
+import 'package:flutter_entify/src/migrations/auto_migrations/metadata/migration_metadata.dart';
 
 import 'package:sqflite/sqflite.dart';
 

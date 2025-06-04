@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 class DbEntityDefinition {
   int id;

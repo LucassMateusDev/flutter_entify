@@ -1,4 +1,4 @@
-import 'package:entify/src/migrations/i_migration.dart';
+import 'package:flutter_entify/src/migrations/i_migration.dart';
 
 abstract class CreateMigration implements IMigration {
   @override

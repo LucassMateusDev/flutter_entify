@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:entify/entify.dart';
-import 'package:entify/src/entities/db_entity_definition.dart';
+import 'package:flutter_entify/flutter_entify.dart';
+import 'package:flutter_entify/src/entities/db_entity_definition.dart';
 
 class MigrationMetadata {
   final String entityName;

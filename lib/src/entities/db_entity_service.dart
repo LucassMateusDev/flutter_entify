@@ -1,4 +1,4 @@
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 import '../exceptions/entify_exception.dart';
 import 'db_entity.dart';

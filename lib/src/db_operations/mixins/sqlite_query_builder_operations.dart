@@ -1,5 +1,5 @@
-import 'package:entify/entify.dart';
-import 'package:entify/src/query/sqlite_query_result.dart';
+import 'package:flutter_entify/flutter_entify.dart';
+import 'package:flutter_entify/src/query/sqlite_query_result.dart';
 
 mixin SqliteDbEntityQueryBuilderOperations<T> {
   String get sqlStatement;

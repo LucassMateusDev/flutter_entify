@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:entify/src/db_operations/mixins/sqlite_query_builder_operations.dart';
-import 'package:entify/src/entities/db_entity.dart';
-import 'package:entify/src/query/query_builder.dart';
+import 'package:flutter_entify/src/db_operations/mixins/sqlite_query_builder_operations.dart';
+import 'package:flutter_entify/src/entities/db_entity.dart';
+import 'package:flutter_entify/src/query/query_builder.dart';
 
 class DbEntityQueryBuilder<T> extends QueryBuilder
     with SqliteDbEntityQueryBuilderOperations<T> {

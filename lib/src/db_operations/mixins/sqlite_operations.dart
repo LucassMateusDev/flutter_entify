@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
-import 'package:entify/entify.dart';
-import 'package:entify/src/db_operations/operations/delete_operation.dart';
-import 'package:entify/src/db_operations/operations/select_operation.dart';
-import 'package:entify/src/db_operations/operations/insert_operation.dart';
-import 'package:entify/src/db_operations/operations/update_operation.dart';
+import 'package:flutter_entify/flutter_entify.dart';
+import 'package:flutter_entify/src/db_operations/operations/delete_operation.dart';
+import 'package:flutter_entify/src/db_operations/operations/select_operation.dart';
+import 'package:flutter_entify/src/db_operations/operations/insert_operation.dart';
+import 'package:flutter_entify/src/db_operations/operations/update_operation.dart';
 
 import '../../exceptions/entify_exception.dart';
 
