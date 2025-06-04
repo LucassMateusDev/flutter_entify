@@ -1,9 +1,5 @@
 name: flutter_entify
 description: "A lightweight and efficient ORM for Flutter, inspired by .NET's Entity Framework and built on Sqflite. Simplifies CRUD operations and query execution, entity mapping and database transactions."
-long_description: |
-  `flutter_entify` is an ORM for Flutter based on `sqflite`, inspired by .NET's Entity Framework. 
-  It provides an easy way to map entities, execute crud operations and simplify SQL queries. 
-  Supports transactions, foreign keys, migrations, and query chaining.
 
 repository: https://github.com/LucassMateus/flutter_entify
 
@@ -29,12 +25,14 @@ dependencies:
   sqflite_common: ^2.5.4
   dart_class_mapper: ^1.0.0
   meta: ^1.15.0
+  synchronized: ^3.1.0+1
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  synchronized: ^3.1.0+1
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
