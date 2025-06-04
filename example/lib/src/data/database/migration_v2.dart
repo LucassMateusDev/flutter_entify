@@ -1,4 +1,4 @@
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 class MigrationV2 extends UpdateMigration {
   @override

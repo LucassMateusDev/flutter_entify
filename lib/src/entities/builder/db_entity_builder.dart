@@ -1,5 +1,5 @@
-import 'package:entify/entify.dart';
-import 'package:entify/src/entities/builder/db_entity_builder_handler.dart';
+import 'package:flutter_entify/flutter_entify.dart';
+import 'package:flutter_entify/src/entities/builder/db_entity_builder_handler.dart';
 
 import '../../exceptions/entify_exception.dart';
 

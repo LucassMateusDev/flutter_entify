@@ -1,6 +1,6 @@
-import 'package:entify/src/connection/sqlite_db_connection.dart';
-import 'package:entify/src/entities/db_entity.dart';
-import 'package:entify/src/query/db_entity_query_builder.dart';
+import 'package:flutter_entify/src/connection/sqlite_db_connection.dart';
+import 'package:flutter_entify/src/entities/db_entity.dart';
+import 'package:flutter_entify/src/query/db_entity_query_builder.dart';
 
 class DbEntityQuery<T> {
   final DbEntity<T> dbEntity;

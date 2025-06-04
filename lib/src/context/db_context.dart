@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 import 'package:flutter/foundation.dart';
-import 'package:entify/src/config/data_base_config.dart';
-import 'package:entify/src/entities/db_entity_service.dart';
-import 'package:entify/src/transactions/sqlite_db_transaction.dart';
+import 'package:flutter_entify/src/config/data_base_config.dart';
+import 'package:flutter_entify/src/entities/db_entity_service.dart';
+import 'package:flutter_entify/src/transactions/sqlite_db_transaction.dart';
 
 abstract class DbContext {
   late final DbContextOptions options;

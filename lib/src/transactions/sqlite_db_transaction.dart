@@ -1,9 +1,9 @@
 // ignore: depend_on_referenced_packages
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:entify/src/exceptions/entify_exception.dart';
+import 'package:flutter_entify/src/exceptions/entify_exception.dart';
 
-import 'package:entify/src/transactions/transaction_operations.dart';
+import 'package:flutter_entify/src/transactions/transaction_operations.dart';
 
 class SqliteDbTransaction implements TransactionOperations {
   Batch? _batch;

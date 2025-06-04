@@ -1,4 +1,4 @@
-library entify;
+library flutter_entify;
 
 // Connection
 export 'src/connection/sqlite_adm_connection.dart';

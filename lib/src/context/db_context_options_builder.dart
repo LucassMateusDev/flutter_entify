@@ -1,6 +1,6 @@
-import 'package:entify/src/migrations/i_migration.dart';
+import 'package:flutter_entify/src/migrations/i_migration.dart';
 import 'package:meta/meta.dart';
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 class DbContextOptionsBuilder {
   final DbContextOptions _options = DbContextOptions();

@@ -1,4 +1,4 @@
-import 'package:entify/src/entities/db_entity_columns.dart';
+import 'package:flutter_entify/src/entities/db_entity_columns.dart';
 
 class DbEntityBuilderHandler<T> {
   static String getTableName<T>([String? name]) {

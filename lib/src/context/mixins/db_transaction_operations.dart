@@ -1,7 +1,7 @@
-import 'package:entify/entify.dart';
-import 'package:entify/src/db_operations/transaction_operations/delete_in_transaction_operation.dart';
-import 'package:entify/src/db_operations/transaction_operations/insert_in_transaction_operation.dart';
-import 'package:entify/src/db_operations/transaction_operations/update_in_transaction_operation.dart';
+import 'package:flutter_entify/flutter_entify.dart';
+import 'package:flutter_entify/src/db_operations/transaction_operations/delete_in_transaction_operation.dart';
+import 'package:flutter_entify/src/db_operations/transaction_operations/insert_in_transaction_operation.dart';
+import 'package:flutter_entify/src/db_operations/transaction_operations/update_in_transaction_operation.dart';
 
 mixin DbTransactionOperations on DbContext {
   Future<void> openTransaction() async => transaction.open();

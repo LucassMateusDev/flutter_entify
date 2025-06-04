@@ -1,6 +1,6 @@
-import 'package:entify/entify.dart';
-import 'package:entify/src/db_operations/interfaces/db_transaction_operation.dart';
-import 'package:entify/src/transactions/sqlite_db_transaction.dart';
+import 'package:flutter_entify/flutter_entify.dart';
+import 'package:flutter_entify/src/db_operations/interfaces/db_transaction_operation.dart';
+import 'package:flutter_entify/src/transactions/sqlite_db_transaction.dart';
 
 class DeleteInTransactionOperation<T> implements DbTransactionOperation<T> {
   @override

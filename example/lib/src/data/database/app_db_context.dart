@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 import 'package:example/src/domain/entitites.dart';
 
 class AppDbContext extends DbContext with DbTransactionOperations {

@@ -1,5 +1,5 @@
 // ignore: depend_on_referenced_packages
-import 'package:entify/src/transactions/sqlite_db_transaction.dart';
+import 'package:flutter_entify/src/transactions/sqlite_db_transaction.dart';
 
 class TransactionService {
   final SqliteDbTransaction _dbTransaction = SqliteDbTransaction();

@@ -1,3 +1,3 @@
-# entify_example
+# flutter_entify_example
 
-Demonstração de uso do package entify.
+Demonstração de uso do package flutter_entify.

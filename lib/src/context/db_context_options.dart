@@ -1,5 +1,5 @@
-import 'package:entify/src/migrations/i_migration.dart';
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/src/migrations/i_migration.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 import '../exceptions/entify_exception.dart';
 

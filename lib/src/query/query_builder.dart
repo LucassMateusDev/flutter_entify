@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:entify/entify.dart';
+import 'package:flutter_entify/flutter_entify.dart';
 
 class QueryBuilder {
   QueryBuilder(this.connection);
