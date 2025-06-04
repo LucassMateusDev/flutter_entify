@@ -15,7 +15,7 @@ and the Flutter guide for
 </div>
 
 
-Entify é um package baseado no .NET Entity Framework, com ele é possível de forma simplificada criar um banco de dados, mapear entidades para o banco de dados e executar queries. Além disso fornece suporte para transações e migrations e classes auxiliares para realizar operações de CRUD.
+flutter_entify é um package baseado no .NET Entity Framework, com ele é possível de forma simplificada criar um banco de dados, mapear entidades para o banco de dados e executar queries. Além disso fornece suporte para transações e migrations e classes auxiliares para realizar operações de CRUD.
 
 ## 🚀 **Features**
 
@@ -30,24 +30,24 @@ Entify é um package baseado no .NET Entity Framework, com ele é possível de f
 
 ## 📌 **Instalação**
 
-Adicione o **Entify** ao seu projeto usando o **pub.dev**:
+Adicione o **flutter_entify** ao seu projeto usando o **pub.dev**:
 
 ```sh
-flutter pub add entify
+flutter pub add flutter_entify
 ```
 
 ou no pubspec.yaml:
 
 ```sh
 dependencies:
-  entify: ^1.0.0
+  flutter_entify: ^0.0.1
 ```
 
 ---
 
 ## Getting started
 
-Antes de usar o Entify, é necessário configurar o DbContext, que será responsável pela comunicação com o banco de dados.
+Antes de usar o flutter_entify, é necessário configurar o DbContext, que será responsável pela comunicação com o banco de dados.
 
 ## 1️⃣ Criando uma Entidade
 
