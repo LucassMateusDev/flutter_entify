@@ -1,4 +1,4 @@
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity.dart';
+import 'package:entify/src/entities/db_entity.dart';
 
 mixin DbEntityTransformer<T> {
   DbEntity<T> get dbEntity;

@@ -1,32 +1,24 @@
 import 'dart:async';
 
+import 'package:entify/entify.dart';
 import 'package:flutter/foundation.dart';
-import 'package:sqflite_entity_mapper_orm/src/config/data_base_config.dart';
-import 'package:sqflite_entity_mapper_orm/src/connection/sqlite_db_connection.dart';
-import 'package:sqflite_entity_mapper_orm/src/context/db_context_options.dart';
-import 'package:sqflite_entity_mapper_orm/src/context/db_context_options_builder.dart';
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity.dart';
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity_service.dart';
-import 'package:sqflite_entity_mapper_orm/src/mappers/db_entity_mapper.dart';
-import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/migration_manager.dart';
-import 'package:sqflite_entity_mapper_orm/src/set/db_set.dart';
+import 'package:entify/src/config/data_base_config.dart';
+import 'package:entify/src/entities/db_entity_service.dart';
+import 'package:entify/src/transactions/sqlite_db_transaction.dart';
 
 abstract class DbContext {
-  // final DbEntityService dbEntityService;
-  // final SqliteDbConnection dbConnection;
+  late final DbContextOptions options;
   late final DbEntityService dbEntityService;
   late final SqliteDbConnection dbConnection;
-  late final DbContextOptions options;
+  @protected
+  final SqliteDbTransaction transaction = SqliteDbTransaction();
 
   DbContext() {
     onConfiguring(DbContextOptionsBuilder());
   }
 
   List<DbSet> get dbSets;
-  @protected
-  List<DbEntity> dbEntities = [];
-  @protected
-  List<DbEntityMapper> dbMappings = [];
+  List<DbEntity> get dbEntities => dbEntityService.entities.values.toList();
 
   @mustCallSuper
   FutureOr<void> binds() async {}
@@ -36,14 +28,19 @@ abstract class DbContext {
     options = optionsBuilder.build();
   }
 
+  List<DbEntity> configureEntites(DbEntityBuilderProvider provider);
+
   Future<void> initialize() async {
     DataBaseConfig.initialize(
       name: options.databaseName,
       version: options.version,
       migrations: options.migrations,
+      withAutoMigrations: options.withAutoMigrations,
     );
     dbEntityService = DbEntityService.i;
     dbConnection = SqliteDbConnection.get();
+    final entities = configureEntites(DbEntityBuilderProvider());
+    registerEntities(entities);
     await _optionsHandler();
     dbSetsInitialize(dbSets);
     await _executeBindsIfNotExecutedBefore();
@@ -56,35 +53,30 @@ abstract class DbContext {
     }
   }
 
-  void registerEntities() {
+  void registerEntities(List<DbEntity> dbEntities) {
     for (final entity in dbEntities) {
       entity.register();
     }
   }
 
-  void createMappings() {
+  void createMappings(List<CreateDbEntityMap> dbMappings) {
     for (final dbMapper in dbMappings) {
       dbMapper.create();
     }
   }
 
   Future<void> _optionsHandler() async {
-    if (options.hasEntities) _setDbEntitiesFromOptions();
+    // if (options.hasEntities) _setDbEntitiesFromOptions();
     if (options.hasMappings) _setDbMappingsFromOptions();
     if (options.executeBindsBeforeInitialize) await binds();
-    if (options.withAutoMigrations) {
-      await MigrationManager.applyMigrations(dbConnection, dbEntities);
-    }
   }
 
-  void _setDbEntitiesFromOptions() {
-    dbEntities = options.entities;
-    registerEntities();
-  }
+  // void _setDbEntitiesFromOptions() {
+  // registerEntities(options.entities);
+  // }
 
   void _setDbMappingsFromOptions() {
-    dbMappings = options.mappings;
-    createMappings();
+    createMappings(options.mappings);
   }
 
   Future<void> _executeBindsIfNotExecutedBefore() async {

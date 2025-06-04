@@ -1,5 +1,5 @@
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
-import 'package:sqflite_entity_mapper_orm/src/query/sqlite_query_result.dart';
+import 'package:entify/entify.dart';
+import 'package:entify/src/query/sqlite_query_result.dart';
 
 mixin SqliteDbEntityQueryBuilderOperations<T> {
   String get sqlStatement;

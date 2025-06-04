@@ -1,4 +1,4 @@
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 
 class DbEntity<T> {
   String name;
@@ -14,7 +14,7 @@ class DbEntity<T> {
     required this.mapToEntity,
     required this.toUpdateOrInsert,
     required this.primaryKey,
-    required this.columns,
+    this.columns = const [],
     List<Map<String, dynamic>> Function(T e)? uniqueKeys,
     // this.indexes = const {},
   }) : uniqueKeys = uniqueKeys ?? ((T e) => []);

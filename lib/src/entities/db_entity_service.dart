@@ -1,6 +1,6 @@
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 
-import '../exceptions/sqlite_data_mapper_exception.dart';
+import '../exceptions/entify_exception.dart';
 import 'db_entity.dart';
 
 class DbEntityService {
@@ -21,7 +21,7 @@ class DbEntityService {
     final key = getEntityKey<T>();
 
     if (_entityMap.containsKey(key)) {
-      throw SqliteDataMapperException('Entity already registered for type $T');
+      throw EntifyException('Entity already registered for type $T');
     }
 
     _entityMap[key] = entity;

@@ -1,5 +1,6 @@
+import 'package:entify/src/migrations/i_migration.dart';
 import 'package:meta/meta.dart';
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 
 class DbContextOptionsBuilder {
   final DbContextOptions _options = DbContextOptions();
@@ -14,12 +15,12 @@ class DbContextOptionsBuilder {
     return this;
   }
 
-  DbContextOptionsBuilder entities(List<DbEntity> entities) {
-    _options.entities = entities;
-    return this;
-  }
+  // DbContextOptionsBuilder entities(List<DbEntity> entities) {
+  //   _options.entities = entities;
+  //   return this;
+  // }
 
-  DbContextOptionsBuilder mappings(List<DbEntityMapper> mappings) {
+  DbContextOptionsBuilder mappings(List<CreateDbEntityMap> mappings) {
     _options.mappings = mappings;
     return this;
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
-import 'package:sqflite_entity_mapper_orm/src/entities/db_entity_definition.dart';
-import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/metadata/migration_metadata_table.dart';
+import 'package:entify/entify.dart';
+import 'package:entify/src/entities/db_entity_definition.dart';
+import 'package:entify/src/migrations/auto_migrations/metadata/migration_metadata_table.dart';
 
 class MigrationOperations {
   //TODO: Implementar a remoção/alteração de colunas

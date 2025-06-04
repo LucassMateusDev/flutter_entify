@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../exceptions/sqlite_data_mapper_exception.dart';
+import '../exceptions/entify_exception.dart';
 import 'sqlite_connection_factory.dart';
 
 class SqliteAdmConnection with WidgetsBindingObserver {
@@ -8,7 +8,7 @@ class SqliteAdmConnection with WidgetsBindingObserver {
 
   static SqliteAdmConnection get i {
     if (_instance == null) {
-      throw SqliteDataMapperException(
+      throw EntifyException(
         'SqliteAdmConnection is not initialized.',
       );
     }

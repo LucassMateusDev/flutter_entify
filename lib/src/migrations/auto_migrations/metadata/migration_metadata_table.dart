@@ -1,7 +1,6 @@
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
-import 'package:sqflite_entity_mapper_orm/src/migrations/auto_migrations/metadata/migration_metadata.dart';
+import 'package:entify/src/migrations/auto_migrations/metadata/migration_metadata.dart';
 
-import '../../../exceptions/sqlite_data_mapper_exception.dart';
+import 'package:sqflite/sqflite.dart';
 
 class MigrationMetadataTable {
   static String get tableName => 'migration_metadata';
@@ -11,6 +10,7 @@ class MigrationMetadataTable {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         entity_name TEXT NOT NULL,
         column_definitions TEXT NOT NULL,
+        version INTEGER NOT NULL,
         last_modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
       )
     ''';
@@ -22,15 +22,16 @@ class MigrationMetadataTable {
     ''';
 
   static Future<MigrationMetadata?> fromEntity(
-    SqliteDbConnection connection,
+    Database db,
     String entityName,
+    int oldVersion,
   ) async {
-    final db = await connection.open();
-
     final result = await db.query(
       tableName,
-      where: 'entity_name = ?',
-      whereArgs: [entityName],
+      where: 'entity_name = ? and version <= ?',
+      whereArgs: [entityName, oldVersion],
+      orderBy: 'version DESC',
+      limit: 1,
     );
 
     if (result.isEmpty) return null;
@@ -38,36 +39,37 @@ class MigrationMetadataTable {
     return MigrationMetadata.fromMap(result.first);
   }
 
-  static Future<void> createIfNotExists(SqliteDbConnection connection) async {
-    final db = await connection.open();
-
+  static Future<void> createIfNotExists(Database db) async {
     await db.execute(createTableSql);
   }
 
   static Future<void> insert(
-    SqliteDbConnection connection,
+    Database db,
     MigrationMetadata metadata,
   ) async {
-    final db = await connection.open();
-
     await db.insert(tableName, metadata.upSave());
   }
 
   static Future<void> update(
-    SqliteDbConnection connection,
+    Database db,
     MigrationMetadata metadata,
   ) async {
-    final db = await connection.open();
-
-    final id = await db.update(
+    await db.update(
       tableName,
       metadata.upSave(),
       where: 'entity_name = ?',
       whereArgs: [metadata.entityName],
     );
+  }
 
-    if (id == 0) {
-      throw SqliteDataMapperException('Failed to update metadata');
-    }
+  static Future<void> onDowngrade(
+    Database db,
+    int newVersion,
+  ) async {
+    await db.delete(
+      tableName,
+      where: 'version > ?',
+      whereArgs: [newVersion],
+    );
   }
 }

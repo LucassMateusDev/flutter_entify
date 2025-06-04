@@ -1,4 +1,4 @@
-import 'package:sqflite_entity_mapper_orm/sqflite_entity_mapper_orm.dart';
+import 'package:entify/entify.dart';
 
 mixin SqliteEntityOperations<T> {
   SqliteDbConnection get connection;
@@ -37,6 +37,7 @@ mixin SqliteEntityOperations<T> {
     }
   }
 
+  ///Só funciona quando a tabela tem uma chave primária chamada autoincrement
   Future<int> getNextInsertRowId() async {
     try {
       final db = await connection.open();
