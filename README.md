@@ -177,3 +177,8 @@ dbContext.example.deleteAsync(example);
 ```
 
 ### 📌 Exemplos de uso com transações estão disponíveis na aba Example.
+
+### 🚀 Próximos Updates
+- ### 🔗 Relacionamento entre entidades
+- ### ✨ Geração automática das EntityDefinition do DbContext
+- ### 🔍🛢️ Database inspector extension para visualização do banco de dados
